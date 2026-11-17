@@ -2,6 +2,7 @@
 // without starting a server).
 const express = require('express');
 const apiRoutes = require('./routes');
+const feedbackRoutes = require('./routes/feedbackRoutes');
 const notFound = require('./middleware/notFound');
 const errorHandler = require('./middleware/errorHandler');
 
@@ -16,6 +17,7 @@ app.get('/health', (req, res) => {
 });
 
 app.use('/api', apiRoutes);
+app.use('/feedback', feedbackRoutes);
 
 app.use(notFound);
 app.use(errorHandler);
