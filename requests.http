@@ -1,0 +1,202 @@
+### MediBook request collection (VS Code "REST Client" extension).
+### Dates are computed relative to today, matching the seed data.
+
+@base = http://localhost:3000
+@json = application/json
+@day1 = {{$datetime "YYYY-MM-DD" 1 d}}
+@day3 = {{$datetime "YYYY-MM-DD" 3 d}}
+@day5 = {{$datetime "YYYY-MM-DD" 5 d}}
+
+### Health
+GET {{base}}/health
+
+######################## Patients ########################
+
+### List patients
+GET {{base}}/api/patients
+
+### Get one patient
+GET {{base}}/api/patients/1
+
+### Unknown patient -> 404
+GET {{base}}/api/patients/999
+
+### Invalid id -> 400
+GET {{base}}/api/patients/abc
+
+### Create patient -> 201
+# @name newPatient
+POST {{base}}/api/patients
+Content-Type: {{json}}
+
+{ "fullName": "Yaa Asantewaa", "email": "yaa@mail.com", "phone": "0244-123-456" }
+
+### Validation errors -> 400
+POST {{base}}/api/patients
+Content-Type: {{json}}
+
+{ "fullName": "Y", "email": "not-an-email" }
+
+### Duplicate email -> 409
+POST {{base}}/api/patients
+Content-Type: {{json}}
+
+{ "fullName": "Someone Else", "email": "ama@mail.com", "phone": "0244-000-000" }
+
+### Partial update
+PATCH {{base}}/api/patients/{{newPatient.response.body.data.id}}
+Content-Type: {{json}}
+
+{ "phone": "+233 24 555 0000" }
+
+### Replace (all fields required)
+PUT {{base}}/api/patients/{{newPatient.response.body.data.id}}
+Content-Type: {{json}}
+
+{ "fullName": "Yaa Asantewaa", "email": "yaa.asantewaa@mail.com", "phone": "0244-123-456" }
+
+### Delete a patient with history -> 409
+DELETE {{base}}/api/patients/1
+
+### Delete the new patient -> 204
+DELETE {{base}}/api/patients/{{newPatient.response.body.data.id}}
+
+### A patient's appointments
+GET {{base}}/api/patients/1/appointments
+
+######################## Doctors ########################
+
+### List doctors
+GET {{base}}/api/doctors
+
+### Create doctor
+# @name newDoctor
+POST {{base}}/api/doctors
+Content-Type: {{json}}
+
+{ "fullName": "Dr. Yaw Ntim", "specialty": "Orthopaedics", "consultationFee": 180.00, "room": "R-05" }
+
+### Update doctor fee
+PATCH {{base}}/api/doctors/{{newDoctor.response.body.data.id}}
+Content-Type: {{json}}
+
+{ "consultationFee": 175.50 }
+
+### Delete doctor with no appointments -> 204
+DELETE {{base}}/api/doctors/{{newDoctor.response.body.data.id}}
+
+### Doctor statistics (C.4)
+GET {{base}}/api/doctors/1/stats
+
+### Availability for the near-cap day
+GET {{base}}/api/doctors/1/availability?date={{day3}}
+
+### Doctor's appointments on a day
+GET {{base}}/api/doctors/1/appointments?date={{day3}}
+
+######################## Booking (C.2) ########################
+
+### In the past -> 422
+POST {{base}}/api/appointments
+Content-Type: {{json}}
+
+{ "patientId": 2, "doctorId": 2, "appointmentDatetime": "2025-01-06T10:00" }
+
+### 17:00 -> 422 outside working hours
+POST {{base}}/api/appointments
+Content-Type: {{json}}
+
+{ "patientId": 2, "doctorId": 2, "appointmentDatetime": "{{day5}}T17:00" }
+
+### 09:15 -> 422 not on a 30-minute boundary
+POST {{base}}/api/appointments
+Content-Type: {{json}}
+
+{ "patientId": 2, "doctorId": 2, "appointmentDatetime": "{{day5}}T09:15" }
+
+### Malformed date -> 400
+POST {{base}}/api/appointments
+Content-Type: {{json}}
+
+{ "patientId": 2, "doctorId": 2, "appointmentDatetime": "next tuesday" }
+
+### Slot already taken -> 409 with waitlist offer
+POST {{base}}/api/appointments
+Content-Type: {{json}}
+
+{ "patientId": 12, "doctorId": 1, "appointmentDatetime": "{{day3}}T09:00" }
+
+### Book the 12th (last) appointment on the near-cap day -> 201
+# @name lastSlot
+POST {{base}}/api/appointments
+Content-Type: {{json}}
+
+{ "patientId": 13, "doctorId": 1, "appointmentDatetime": "{{day3}}T16:30" }
+
+### Day is now full -> 409 DAY_FULL with waitlist offer
+POST {{base}}/api/appointments
+Content-Type: {{json}}
+
+{ "patientId": 12, "doctorId": 1, "appointmentDatetime": "{{day3}}T16:00" }
+
+######################## Waitlist (Part E) ########################
+
+### Join the waitlist -> 201
+POST {{base}}/api/waitlist
+Content-Type: {{json}}
+
+{ "patientId": 12, "doctorId": 1, "appointmentDatetime": "{{day3}}T16:00" }
+
+### Join again -> 409
+POST {{base}}/api/waitlist
+Content-Type: {{json}}
+
+{ "patientId": 12, "doctorId": 1, "appointmentDatetime": "{{day3}}T16:00" }
+
+### Waitlist for a free slot -> 422
+POST {{base}}/api/waitlist
+Content-Type: {{json}}
+
+{ "patientId": 2, "doctorId": 2, "appointmentDatetime": "{{day5}}T16:00" }
+
+### View the waitlist
+GET {{base}}/api/waitlist?doctorId=1&date={{day3}}
+
+######################## Cancellation (C.3) ########################
+
+### Cancel the 16:30 booking (> 48h notice -> 100% refund); the worker promotes patient 12
+DELETE {{base}}/api/appointments/{{lastSlot.response.body.data.id}}
+
+### Cancel again -> 409
+DELETE {{base}}/api/appointments/{{lastSlot.response.body.data.id}}
+
+### Waitlist is empty again after promotion
+GET {{base}}/api/waitlist?doctorId=1&date={{day3}}
+
+### Tomorrow 10:00 appointment (seed) - cancel it for the < 24h or 24-48h tier
+GET {{base}}/api/appointments?doctorId=2&date={{day1}}
+
+### Cancelling a past appointment -> 422
+DELETE {{base}}/api/appointments/1
+
+### Appointment list with filters
+GET {{base}}/api/appointments?doctorId=1&status=CANCELLED
+
+######################## Reports (C.5, C.6) ########################
+
+### Doctors report (doctor 4 has zero appointments)
+GET {{base}}/api/reports/doctors
+
+### Busy days (> 80% of 12)
+GET {{base}}/api/reports/busy-days
+
+######################## Feedback page (Part G) ########################
+
+### English (default)
+GET {{base}}/feedback
+
+### French
+GET {{base}}/feedback?lang=fr
+
+### Unsupported language -> English
+GET {{base}}/feedback?lang=de
