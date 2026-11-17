@@ -1,0 +1,37 @@
+{
+  "name": "medibook-api",
+  "version": "1.0.0",
+  "description": "MediBook clinic appointment booking backend - Express, MySQL and Redis",
+  "main": "src/server.js",
+  "type": "commonjs",
+  "scripts": {
+    "start": "node src/server.js",
+    "worker": "node src/worker.js",
+    "dev": "node --watch src/server.js",
+    "db:setup": "node scripts/db-setup.js",
+    "test": "jest"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "jest": {
+    "testEnvironment": "node",
+    "roots": [
+      "<rootDir>/tests"
+    ]
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/armeleger/adv-backend-summative-medibook-project.git"
+  },
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^18.0.10",
+    "express": "^5.3.0",
+    "ioredis": "^5.11.1",
+    "mysql2": "^3.24.6"
+  },
+  "devDependencies": {
+    "jest": "^30.5.2"
+  }
+}
