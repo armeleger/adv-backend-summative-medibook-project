@@ -3,7 +3,7 @@
 //   mysql -u root -p < database/schema.sql && mysql -u root -p < database/seed.sql
 // Usage: npm run db:setup            (schema + seed)
 //        npm run db:setup -- --no-seed (schema only)
-require('dotenv').config();
+require('dotenv').config({ quiet: true });
 const fs = require('node:fs/promises');
 const path = require('node:path');
 const mysql = require('mysql2/promise');
