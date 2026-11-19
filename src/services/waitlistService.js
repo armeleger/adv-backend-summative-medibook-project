@@ -74,6 +74,9 @@ async function joinWaitlist({ patientId, doctorId, appointmentDatetime, now = ne
 }
 
 async function getWaitlist(doctorId, day) {
+  if (!(await doctorModel.findById(doctorId))) {
+    throw AppError.notFound(`Doctor ${doctorId} not found`, 'DOCTOR_NOT_FOUND');
+  }
   const entries = await withRedis(() => waitlistStore.list(doctorId, day));
   return entries.map(({ entry }, index) => ({ position: index + 1, ...entry }));
 }

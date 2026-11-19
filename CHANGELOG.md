@@ -13,6 +13,9 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
   Each slot now has a `status` (`available`, `booked`, `past`, `day_full`) and
   is only `available` when it can really be booked. Logic moved into the pure
   `describeDaySlots()` helper so it is unit tested.
+- **Waitlist lookup for an unknown doctor returned 200** (`GET /api/waitlist`).
+  `?doctorId=999` answered `200 { "data": [] }`, hiding a typo in the id. It
+  now returns `404 DOCTOR_NOT_FOUND`, consistent with every other endpoint.
 
 ## [1.0.0] - 2026-11-17
 
