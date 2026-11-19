@@ -52,4 +52,17 @@ function listDailySlotTimes() {
   return times;
 }
 
-module.exports = { validateSlot, listDailySlotTimes };
+// Status of every slot on one doctor-day. A slot is bookable only if it is
+// still in the future, not already booked, and the day is below the cap.
+//   bookedTimes: Set of "HH:mm" strings; dayFull: daily cap reached
+function describeDaySlots(day, bookedTimes, dayFull, now = new Date()) {
+  return listDailySlotTimes().map((time) => {
+    let status = 'available';
+    if (bookedTimes.has(time)) status = 'booked';
+    else if (parseLocalDateTime(`${day} ${time}`).getTime() <= now.getTime()) status = 'past';
+    else if (dayFull) status = 'day_full';
+    return { time, status, available: status === 'available' };
+  });
+}
+
+module.exports = { validateSlot, listDailySlotTimes, describeDaySlots };

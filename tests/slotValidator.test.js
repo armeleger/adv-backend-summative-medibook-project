@@ -1,4 +1,4 @@
-const { validateSlot, listDailySlotTimes } = require('../src/utils/slotValidator');
+const { validateSlot, listDailySlotTimes, describeDaySlots } = require('../src/utils/slotValidator');
 
 // Fixed "now" so results never depend on when the tests run.
 const NOW = new Date(2026, 7, 1, 12, 0); // 1 Aug 2026, 12:00
@@ -63,5 +63,29 @@ describe('listDailySlotTimes', () => {
     expect(slots[0]).toBe('09:00');
     expect(slots.at(-1)).toBe('16:30');
     expect(slots).toHaveLength(16);
+  });
+});
+
+describe('describeDaySlots', () => {
+  const statusOf = (slots, time) => slots.find((slot) => slot.time === time).status;
+
+  test('slots that have already started today are past, not available', () => {
+    const slots = describeDaySlots('2026-08-01', new Set(['14:00']), false, NOW); // NOW = 12:00
+    expect(statusOf(slots, '11:30')).toBe('past');
+    expect(statusOf(slots, '12:00')).toBe('past');
+    expect(statusOf(slots, '12:30')).toBe('available');
+    expect(statusOf(slots, '14:00')).toBe('booked');
+  });
+
+  test('a whole day in the past has no available slots', () => {
+    const slots = describeDaySlots('2026-07-20', new Set(), false, NOW);
+    expect(slots.every((slot) => slot.status === 'past' && !slot.available)).toBe(true);
+  });
+
+  test('when the daily cap is reached, free future slots are day_full', () => {
+    const slots = describeDaySlots('2026-08-10', new Set(['09:00']), true, NOW);
+    expect(statusOf(slots, '09:00')).toBe('booked');
+    expect(statusOf(slots, '09:30')).toBe('day_full');
+    expect(slots.some((slot) => slot.available)).toBe(false);
   });
 });

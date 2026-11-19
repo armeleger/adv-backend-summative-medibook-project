@@ -3,7 +3,7 @@ const appointmentModel = require('../models/appointmentModel');
 const reportModel = require('../models/reportModel');
 const { MAX_APPOINTMENTS_PER_DAY, STATS_WINDOW_DAYS } = require('../config/businessRules');
 const { validateDoctor } = require('../utils/validators');
-const { listDailySlotTimes } = require('../utils/slotValidator');
+const { describeDaySlots } = require('../utils/slotValidator');
 const { formatDate, formatDateTime, startOfDay, addDays } = require('../utils/dateTime');
 const { createCrudController } = require('./crudControllerFactory');
 const { requireId, requireDate, optionalDate } = require('./requestHelpers');
@@ -59,7 +59,8 @@ async function getStats(req, res) {
 }
 
 // GET /api/doctors/:id/availability?date=YYYY-MM-DD
-// Lists every slot of the day and whether it can still be booked.
+// Lists every slot of the day with its status: available, booked, past or
+// day_full.
 async function getAvailability(req, res) {
   const doctorId = requireId(req.params.id);
   const day = requireDate(req.query.date);
@@ -75,10 +76,7 @@ async function getAvailability(req, res) {
       bookedAppointments: bookedTimes.size,
       dailyCap: MAX_APPOINTMENTS_PER_DAY,
       dayFull,
-      slots: listDailySlotTimes().map((time) => ({
-        time,
-        available: !dayFull && !bookedTimes.has(time),
-      })),
+      slots: describeDaySlots(day, bookedTimes, dayFull),
     },
   });
 }
