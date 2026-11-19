@@ -1,5 +1,5 @@
 // parseJob is pure; requiring jobQueue does not open a Redis connection.
-const { parseJob } = require('../src/queues/jobQueue');
+const { parseJob, retryDelayMs, MAX_ATTEMPTS } = require('../src/queues/jobQueue');
 
 describe('parseJob', () => {
   test('parses a valid job and defaults attempts to 0', () => {
@@ -20,5 +20,17 @@ describe('parseJob', () => {
     ['payload not an object', JSON.stringify({ type: 'SLOT_FREED', payload: 'x' })],
   ])('rejects %s', (_label, raw) => {
     expect(parseJob(raw)).toBeNull();
+  });
+});
+
+describe('retryDelayMs', () => {
+  test('doubles from 5 seconds and is capped at 60 seconds', () => {
+    expect([1, 2, 3, 4, 5, 6].map(retryDelayMs)).toEqual([5000, 10000, 20000, 40000, 60000, 60000]);
+  });
+
+  test('all retries together cover a short outage (over 2 minutes)', () => {
+    let total = 0;
+    for (let attempt = 1; attempt < MAX_ATTEMPTS; attempt += 1) total += retryDelayMs(attempt);
+    expect(total).toBeGreaterThanOrEqual(120000);
   });
 });

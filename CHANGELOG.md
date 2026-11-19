@@ -22,6 +22,14 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
   again) on every worker restart. Malformed jobs and jobs of an unknown type
   now go straight to `medibook:jobs:failed` and are logged as `JOB_FAILED`.
   Validation lives in the pure `parseJob()` helper, which is unit tested.
+- **Retries were used up instantly during an outage.** A failed job was pushed
+  straight back onto the queue, so all 5 attempts ran within milliseconds
+  while MySQL was down and the job was dead-lettered; the waitlisted patient
+  was never promoted even after MySQL came back. Failed jobs now wait in a
+  `medibook:jobs:delayed` sorted set with exponential backoff (5s, 10s, 20s,
+  40s, 60s; 6 attempts, about 2 minutes) before being retried. Verified by
+  stopping MySQL during a promotion: the job retried after 5s and promoted
+  the patient once MySQL was back.
 
 ## [1.0.0] - 2026-11-17
 

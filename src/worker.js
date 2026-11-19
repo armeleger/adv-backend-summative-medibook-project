@@ -10,7 +10,8 @@ const { promoteFromWaitlist } = require('./services/waitlistService');
 const { sendConfirmation } = require('./services/notificationService');
 const auditLogger = require('./utils/auditLogger');
 
-const POLL_TIMEOUT_SECONDS = 5;
+// Short poll so delayed retries are picked up within ~2 seconds of falling due.
+const POLL_TIMEOUT_SECONDS = 2;
 const ERROR_BACKOFF_MS = 2000;
 
 const handlers = {
@@ -43,8 +44,9 @@ async function processJob({ raw, job }) {
     await handler(job.payload);
     await jobQueue.complete(raw);
   } catch (err) {
-    const { attempts, gaveUp } = await jobQueue.retryOrFail(raw, job, err);
-    console.error(`[worker] ${job.type} failed (attempt ${attempts}/${jobQueue.MAX_ATTEMPTS}): ${err.message}`);
+    const { attempts, gaveUp, delayMs } = await jobQueue.retryOrFail(raw, job, err);
+    const next = gaveUp ? 'giving up' : `retrying in ${delayMs / 1000}s`;
+    console.error(`[worker] ${job.type} failed (attempt ${attempts}/${jobQueue.MAX_ATTEMPTS}, ${next}): ${err.message}`);
     if (gaveUp) {
       await auditLogger.log('JOB_FAILED', { jobId: job.id, type: job.type, payload: job.payload, error: err.message });
     }
@@ -62,6 +64,7 @@ async function run() {
 
   while (running) {
     try {
+      await jobQueue.promoteDueJobs();
       const reserved = await jobQueue.reserveNext(blockingClient, POLL_TIMEOUT_SECONDS);
       if (reserved) await processJob(reserved);
     } catch (err) {

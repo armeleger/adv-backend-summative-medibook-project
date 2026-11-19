@@ -309,7 +309,8 @@ Plain Redis lists via `ioredis`, so every step is visible and explainable.
 **Worker** (`src/worker.js`, a separate `npm run worker` process):
 
 - `BLMOVE medibook:jobs → medibook:jobs:processing` takes a job atomically. The job is removed from `processing` only after it succeeds.
-- On failure the job is re-queued with `attempts + 1` (one `MULTI`, so it is never in neither list). After 5 attempts it moves to `medibook:jobs:failed` and is logged.
+- On failure the job waits in the sorted set `medibook:jobs:delayed`, scored by its retry time, with exponential backoff: 5s, 10s, 20s, 40s, then 60s, about 2 minutes in total. That is enough to ride out a database or Redis restart. Each move is a single `MULTI` or Lua script, so a job is never in neither place. After 6 attempts it moves to `medibook:jobs:failed` and is logged.
+- Malformed jobs (invalid JSON) and unknown job types can never succeed, so they go straight to `medibook:jobs:failed`.
 - On start-up, anything left in `processing` (worker crashed mid-job) is moved back to the queue.
 
 **What if the promoted booking fails?** The patient must not vanish from both the queue and the table:
