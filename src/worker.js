@@ -32,8 +32,14 @@ const sleep = (ms) => new Promise((resolve) => { setTimeout(resolve, ms); });
 
 async function processJob({ raw, job }) {
   const handler = handlers[job.type];
+  if (!handler) {
+    // Retrying cannot help a job type this worker does not know.
+    await jobQueue.retryOrFail(raw, job, new Error(`Unknown job type ${job.type}`), { retryable: false });
+    console.error(`[worker] unknown job type ${job.type} moved to failed list`);
+    await auditLogger.log('JOB_FAILED', { jobId: job.id, type: job.type, error: 'UNKNOWN_JOB_TYPE' });
+    return;
+  }
   try {
-    if (!handler) throw new Error(`Unknown job type ${job.type}`);
     await handler(job.payload);
     await jobQueue.complete(raw);
   } catch (err) {

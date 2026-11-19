@@ -16,6 +16,12 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 - **Waitlist lookup for an unknown doctor returned 200** (`GET /api/waitlist`).
   `?doctorId=999` answered `200 { "data": [] }`, hiding a typo in the id. It
   now returns `404 DOCTOR_NOT_FOUND`, consistent with every other endpoint.
+- **A malformed job blocked the worker queue forever.** A job that was not
+  valid JSON threw inside the worker loop after `BLMOVE` had moved it to
+  `medibook:jobs:processing`, so it stayed there and was re-queued (and failed
+  again) on every worker restart. Malformed jobs and jobs of an unknown type
+  now go straight to `medibook:jobs:failed` and are logged as `JOB_FAILED`.
+  Validation lives in the pure `parseJob()` helper, which is unit tested.
 
 ## [1.0.0] - 2026-11-17
 

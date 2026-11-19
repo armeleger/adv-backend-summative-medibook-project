@@ -40,10 +40,42 @@ async function enqueue(type, payload) {
 
 // ---- worker side -----------------------------------------------------------
 
+// Returns the job object, or null if raw is not a valid job (bad JSON, or
+// missing type/payload). Pure, so it is unit tested.
+function parseJob(raw) {
+  try {
+    const job = JSON.parse(raw);
+    const valid = job !== null && typeof job === 'object' && typeof job.type === 'string'
+      && job.payload !== null && typeof job.payload === 'object';
+    return valid ? { attempts: 0, ...job } : null;
+  } catch {
+    return null;
+  }
+}
+
+// Removes a job from processing and parks it in the failed list, atomically.
+async function moveToFailed(raw, failedEntry) {
+  await getRedis()
+    .multi()
+    .lrem(KEYS.processing, 1, raw)
+    .rpush(KEYS.failed, JSON.stringify(failedEntry))
+    .exec();
+}
+
 // Waits up to timeoutSeconds for the next job. Returns { raw, job } or null.
+// A malformed job can never succeed, so it goes straight to the failed list
+// instead of sitting in processing and being re-queued on every restart.
 async function reserveNext(blockingClient, timeoutSeconds) {
   const raw = await blockingClient.blmove(KEYS.pending, KEYS.processing, 'LEFT', 'RIGHT', timeoutSeconds);
-  return raw ? { raw, job: JSON.parse(raw) } : null;
+  if (!raw) return null;
+  const job = parseJob(raw);
+  if (!job) {
+    await moveToFailed(raw, { raw, lastError: 'MALFORMED_JOB', failedAt: new Date().toISOString() });
+    console.error(`[queue] malformed job moved to ${KEYS.failed}: ${raw.slice(0, 100)}`);
+    await auditLogger.log('JOB_FAILED', { reason: 'MALFORMED_JOB', raw: raw.slice(0, 500) });
+    return null;
+  }
+  return { raw, job };
 }
 
 async function complete(raw) {
@@ -52,10 +84,11 @@ async function complete(raw) {
 
 // Removes the job from processing and either re-queues it (attempts + 1) or
 // moves it to the failed list - in one MULTI so it is never in neither list.
-async function retryOrFail(raw, job, error) {
+// retryable: false for errors that can never succeed (e.g. unknown job type).
+async function retryOrFail(raw, job, error, { retryable = true } = {}) {
   const attempts = job.attempts + 1;
   const updated = JSON.stringify({ ...job, attempts, lastError: error.message });
-  const giveUp = attempts >= MAX_ATTEMPTS;
+  const giveUp = !retryable || attempts >= MAX_ATTEMPTS;
   await getRedis()
     .multi()
     .lrem(KEYS.processing, 1, raw)
@@ -72,4 +105,14 @@ async function requeueInterrupted() {
   return count;
 }
 
-module.exports = { JOB_TYPES, KEYS, MAX_ATTEMPTS, enqueue, reserveNext, complete, retryOrFail, requeueInterrupted };
+module.exports = {
+  JOB_TYPES,
+  KEYS,
+  MAX_ATTEMPTS,
+  enqueue,
+  parseJob,
+  reserveNext,
+  complete,
+  retryOrFail,
+  requeueInterrupted,
+};
