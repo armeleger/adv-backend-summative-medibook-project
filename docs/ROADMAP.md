@@ -27,7 +27,7 @@ This file records only work that has actually been done, and plans the rest. Tic
   - [x] `fix(worker)`: a malformed job blocked the processing list forever
   - [x] `fix(worker)`: retries were used up instantly during an outage (now exponential backoff)
 - [x] This roadmap and the Miro schema guide
-- [ ] 17:00 review → push
+- [x] Reviewed and approved → pushed
 
 ---
 
