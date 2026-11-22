@@ -223,6 +223,7 @@ Base URL `http://localhost:3000`. Request and response bodies are JSON. Successf
 |---|---|---|---|
 | POST | `/api/waitlist` | Join `{ patientId, doctorId, appointmentDatetime }` when that slot/day is full | 201 |
 | GET | `/api/waitlist?doctorId=&date=` | View a doctor-day's queue in order | 200 |
+| DELETE | `/api/waitlist/:doctorId/:date/:patientId` | Leave a waitlist | 204 |
 
 ### Reports
 
@@ -244,6 +245,8 @@ Base URL `http://localhost:3000`. Request and response bodies are JSON. Successf
 | 409 | Conflicts with current state: slot taken, day full (both include a waitlist offer), patient double-booked, already cancelled, duplicate email, deleting a record with history |
 | 422 | Well-formed but breaks a rule: slot in the past, outside 09:00–17:00, not on a :00/:30 boundary, cancelling a past appointment, joining a waitlist for a slot that is still free |
 | 503 | Redis/MySQL temporarily unavailable |
+
+**Leaving a waitlist** uses `DELETE /api/waitlist/:doctorId/:date/:patientId`. A waitlist entry is identified by its natural key, (doctor, day, patient), because a patient can be on a given doctor-day waitlist only once. That is the same key Redis uses, so the client never needs to know an internal entry id. If the worker has already read the list when a patient leaves, it re-checks membership before booking them.
 
 **REST choices.** Cancellation is `DELETE /api/appointments/:id`. From the client's point of view the booking is removed. The server performs a soft delete (status `CANCELLED`) to keep refund history, so the response is `200` with the refund details rather than `204`. Statistics and availability are sub-resources of a doctor (`/doctors/:id/stats`). Cross-doctor reports live under `/reports`.
 

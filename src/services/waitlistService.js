@@ -81,6 +81,19 @@ async function getWaitlist(doctorId, day) {
   return entries.map(({ entry }, index) => ({ position: index + 1, ...entry }));
 }
 
+// A patient leaves a waitlist (e.g. they found another appointment).
+async function leaveWaitlist({ doctorId, day, patientId }) {
+  const [patient, doctor] = await Promise.all([patientModel.findById(patientId), doctorModel.findById(doctorId)]);
+  if (!patient) throw AppError.notFound(`Patient ${patientId} not found`, 'PATIENT_NOT_FOUND');
+  if (!doctor) throw AppError.notFound(`Doctor ${doctorId} not found`, 'DOCTOR_NOT_FOUND');
+
+  const removed = await withRedis(() => waitlistStore.removePatient(doctorId, day, patientId));
+  if (!removed) {
+    throw AppError.notFound(`Patient ${patientId} is not on the waitlist for doctor ${doctorId} on ${day}`, 'NOT_ON_WAITLIST');
+  }
+  await auditLogger.log('WAITLIST_LEFT', { patientId, doctorId, day });
+}
+
 // Called by the worker for a SLOT_FREED job.
 //
 // Failure handling - a patient must never vanish from both the waitlist and
@@ -97,6 +110,9 @@ async function promoteFromWaitlist({ doctorId, day, appointmentDatetime }, { now
   const entries = await waitlistStore.list(doctorId, day);
 
   for (const { raw, entry } of entries) {
+    // The patient may have left the waitlist after the list was read.
+    if (!(await waitlistStore.isWaiting(doctorId, day, entry.patientId))) continue;
+
     const patient = await patientModel.findById(entry.patientId);
     if (!patient) {
       await waitlistStore.remove(doctorId, day, raw, entry.patientId);
@@ -139,4 +155,4 @@ async function promoteFromWaitlist({ doctorId, day, appointmentDatetime }, { now
   return { promoted: null, reason: entries.length === 0 ? 'WAITLIST_EMPTY' : 'NO_ELIGIBLE_PATIENT' };
 }
 
-module.exports = { joinWaitlist, getWaitlist, promoteFromWaitlist };
+module.exports = { joinWaitlist, getWaitlist, leaveWaitlist, promoteFromWaitlist };

@@ -48,4 +48,35 @@ async function remove(doctorId, day, raw, patientId) {
     .exec();
 }
 
-module.exports = { add, list, remove };
+// Removes a patient's entry by patient id (used when a patient leaves the
+// waitlist). Lua keeps the find + LREM + SREM atomic. Returns true if removed.
+const REMOVE_PATIENT_SCRIPT = `
+  local entries = redis.call('LRANGE', KEYS[1], 0, -1)
+  for _, raw in ipairs(entries) do
+    local entry = cjson.decode(raw)
+    if tostring(entry.patientId) == ARGV[1] then
+      redis.call('LREM', KEYS[1], 1, raw)
+      redis.call('SREM', KEYS[2], ARGV[1])
+      return 1
+    end
+  end
+  return 0
+`;
+
+async function removePatient(doctorId, day, patientId) {
+  const removed = await getRedis().eval(
+    REMOVE_PATIENT_SCRIPT,
+    2,
+    waitlistKey(doctorId, day),
+    membersKey(doctorId, day),
+    String(patientId),
+  );
+  return removed === 1;
+}
+
+// Is the patient still waiting? (They may have left after the worker read the list.)
+async function isWaiting(doctorId, day, patientId) {
+  return (await getRedis().sismember(membersKey(doctorId, day), String(patientId))) === 1;
+}
+
+module.exports = { add, list, remove, removePatient, isWaiting };

@@ -19,4 +19,16 @@ async function getWaitlist(req, res) {
   res.json({ data: await waitlistService.getWaitlist(doctorId, day) });
 }
 
-module.exports = { joinWaitlist, getWaitlist };
+// DELETE /api/waitlist/:doctorId/:date/:patientId
+// A waitlist entry is identified by its natural key: one doctor, one day,
+// one patient (a patient can be on a given doctor-day waitlist only once).
+async function leaveWaitlist(req, res) {
+  await waitlistService.leaveWaitlist({
+    doctorId: requireId(req.params.doctorId, 'doctorId'),
+    day: requireDate(req.params.date),
+    patientId: requireId(req.params.patientId, 'patientId'),
+  });
+  res.status(204).end();
+}
+
+module.exports = { joinWaitlist, getWaitlist, leaveWaitlist };

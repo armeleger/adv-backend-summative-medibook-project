@@ -5,6 +5,13 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+### Added
+
+- `DELETE /api/waitlist/:doctorId/:date/:patientId` lets a patient leave a
+  waitlist (`204`; `404 NOT_ON_WAITLIST` if they are not on it). Removal is
+  atomic in Redis, the worker re-checks membership before promoting, and the
+  event is logged as `WAITLIST_LEFT`.
+
 ### Fixed
 
 - **Availability offered slots in the past** (`GET /api/doctors/:id/availability`).

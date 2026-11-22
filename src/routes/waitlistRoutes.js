@@ -7,4 +7,6 @@ router.route('/')
   .get(controller.getWaitlist)
   .post(controller.joinWaitlist);
 
+router.delete('/:doctorId/:date/:patientId', controller.leaveWaitlist);
+
 module.exports = router;

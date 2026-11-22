@@ -162,6 +162,12 @@ Content-Type: {{json}}
 ### View the waitlist
 GET {{base}}/api/waitlist?doctorId=1&date={{day3}}
 
+### Leave the waitlist -> 204 (run "Join the waitlist" again afterwards for the cancellation demo)
+DELETE {{base}}/api/waitlist/1/{{day3}}/12
+
+### Leave again -> 404 NOT_ON_WAITLIST
+DELETE {{base}}/api/waitlist/1/{{day3}}/12
+
 ######################## Cancellation (C.3) ########################
 
 ### Cancel the 16:30 booking (> 48h notice -> 100% refund); the worker promotes patient 12
