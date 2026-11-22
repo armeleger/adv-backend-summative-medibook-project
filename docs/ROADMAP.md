@@ -29,26 +29,23 @@ This file records only work that has actually been done, and plans the rest. Tic
 - [x] This roadmap and the Miro schema guide
 - [x] Reviewed and approved → pushed
 
+### Fri 20 – Sat 21 Nov — no development
+- The planned items (leave-waitlist endpoint, API tests) were not started on these days and moved to Sunday.
+
+### Sun 22 Nov — security incident, then catch-up
+- [x] Found that both GitHub repos had been force-pushed with forged commits (an `init` start hook, `.env` removed from `.gitignore`). Account secured and both repos restored from the clean local copies.
+- [x] `feat(waitlist)`: `DELETE /api/waitlist/:doctorId/:date/:patientId` to leave a waitlist, documented in the README and `requests.http`
+- [x] `test(api)`: HTTP-level tests with `supertest`, models and services mocked (90 tests in total, still no MySQL/Redis)
+- [x] `ci`: GitHub Actions runs `npm test` on Node 20 and 22
+- [x] Approved → pushed
+- [ ] Read through `bookingService.js`, `cancellationService.js`, `waitlistService.js` and write your own notes for the video (moved to Monday)
+
 ---
 
 ## Planned
 
-### Fri 20 Nov — waitlist completeness (~2 h)
-- [ ] `feat(waitlist)`: let a patient leave a waitlist. Decide the URL (e.g. `DELETE /api/waitlist/:doctorId/:date/:patientId`) and justify it in the README.
-- [ ] `test(waitlist)`: unit tests for the new validation
-- [ ] `docs(api)`: add the request to `requests.http` and the README table
-- [ ] 17:00 review → push
-
-### Sat 21 Nov — API tests (~2 h, keep the afternoon free)
-- [ ] `test(api)`: HTTP-level tests with `supertest`, with models mocked, so `npm test` still needs no MySQL or Redis. Cover 400/404/409/422 and central error handling.
-- [ ] 17:00 review → push
-
-### Sun 22 Nov — light day (~1 h)
-- [ ] `chore(ci)`: GitHub Actions workflow that runs `npm test` on every push
-- [ ] Read through `bookingService.js`, `cancellationService.js`, `waitlistService.js` and write your own notes for the video (not committed)
-- [ ] 17:00 review → push (CI only)
-
 ### Mon 23 Nov — schema in Miro + rehearsal (~3 h)
+- [ ] Read through the three service files and write your own video notes (from Sunday)
 - [ ] Recreate the schema diagram in Miro using [schema-miro-guide.md](schema-miro-guide.md)
 - [ ] Export as PNG (and PDF if you like), replace `schema-diagram.png`, delete `schema-diagram.svg` so only one diagram exists
 - [ ] `docs(db)`: commit the Miro export
