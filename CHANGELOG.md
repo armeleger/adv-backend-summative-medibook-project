@@ -14,6 +14,8 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 - HTTP-level API tests (`tests/api.test.js`, `supertest`) covering routing,
   validation and the central error handler with models and services mocked,
   so `npm test` still needs no MySQL or Redis.
+- GitHub Actions workflow running `npm test` on Node 20 and 22 for every push
+  to `main` and every pull request.
 
 ### Fixed
 

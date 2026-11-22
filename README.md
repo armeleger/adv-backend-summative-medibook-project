@@ -1,5 +1,7 @@
 # MediBook — Clinic Appointment System (Backend)
 
+[![Tests](https://github.com/armeleger/adv-backend-summative-medibook-project/actions/workflows/test.yml/badge.svg)](https://github.com/armeleger/adv-backend-summative-medibook-project/actions/workflows/test.yml)
+
 Express.js + MySQL + Redis backend for booking doctor appointments: patients, doctors and appointments; booking rules (future only, working hours, 30-minute slots, 12 appointments per doctor per day, no double booking under concurrency); cancellations with server-computed refunds; a Redis-backed waitlist promoted by a separate worker process; an audit log; SQL reports; and a localized feedback page.
 
 The original assignment brief is in [docs/assignment-brief.md](docs/assignment-brief.md).
@@ -338,6 +340,8 @@ MySQL `DATETIME` has no timezone. Appointment times are stored as clinic wall-cl
 ```bash
 npm test
 ```
+
+GitHub Actions (`.github/workflows/test.yml`) runs the same `npm test` on Node 20 and 22 for every push to `main` and every pull request.
 
 None of the tests need MySQL or Redis. The unit tests use pure functions with fixed dates, so results never depend on when they run. The API tests mock the models and services.
 
