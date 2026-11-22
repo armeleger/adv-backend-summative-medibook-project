@@ -11,6 +11,9 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
   waitlist (`204`; `404 NOT_ON_WAITLIST` if they are not on it). Removal is
   atomic in Redis, the worker re-checks membership before promoting, and the
   event is logged as `WAITLIST_LEFT`.
+- HTTP-level API tests (`tests/api.test.js`, `supertest`) covering routing,
+  validation and the central error handler with models and services mocked,
+  so `npm test` still needs no MySQL or Redis.
 
 ### Fixed
 

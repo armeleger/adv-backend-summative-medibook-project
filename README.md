@@ -339,7 +339,7 @@ MySQL `DATETIME` has no timezone. Appointment times are stored as clinic wall-cl
 npm test
 ```
 
-All tests are pure unit tests: no MySQL or Redis, and fixed dates so results never depend on when they run.
+None of the tests need MySQL or Redis. The unit tests use pure functions with fixed dates, so results never depend on when they run. The API tests mock the models and services.
 
 | File | What it covers |
 |---|---|
@@ -347,6 +347,8 @@ All tests are pure unit tests: no MySQL or Redis, and fixed dates so results nev
 | `tests/slotValidator.test.js` | valid slots; 09:00 and 16:30 allowed; **17:00 rejected**; 08:30; **09:15**; non-zero seconds; past and "now"; **malformed dates** (2026-02-30, 25:00, wrong format, non-string) → 400 |
 | `tests/validators.test.js` | patient/doctor/booking payload validation, partial updates, id parsing |
 | `tests/auditLogger.test.js` | creates nested `logs/` dir, writes JSON lines, a write failure resolves `false` instead of throwing |
+| `tests/jobQueue.test.js` | job validation (malformed JSON, missing type/payload) and the retry backoff schedule |
+| `tests/api.test.js` | HTTP-level tests with `supertest` against the real app (routes, validation, central error handler) with models and services mocked: 400/404/409/422/500 responses, `Location` headers, the waitlist offer, the refund message, leaving a waitlist, the feedback page |
 | `tests/i18n.test.js` | locale resolution and fallback (`de`, `__proto__`, array values), 5 questions per locale, locale date formatting, HTML escaping |
 
 ---
