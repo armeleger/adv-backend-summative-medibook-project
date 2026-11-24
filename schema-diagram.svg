@@ -1,200 +1,266 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1640" height="1045" viewBox="0 0 1640 1045">
-<rect width="1640" height="1045" fill="#ffffff"/>
-<text x="30" y="48" font-family="-apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="28" font-weight="700" fill="#1a202c">MediBook - Database Schema (3NF)</text>
-<text x="30" y="78" font-family="-apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="15" fill="#4a5568">MySQL 8 · InnoDB · 3 entities · PK = primary key, FK = foreign key, UQ = unique, U1/U2 = member of composite UNIQUE key, NN = NOT NULL, CHK = CHECK</text>
-<rect x="30" y="110" width="470" height="226" rx="8" fill="#ffffff" stroke="#1f6f8b" stroke-width="2"/>
-<path d="M30 118 a8 8 0 0 1 8 -8 h454 a8 8 0 0 1 8 8 v38 h-470 z" fill="#1f6f8b"/>
-<text x="44" y="140" font-family="-apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="19" font-weight="700" fill="#ffffff">patients</text>
-<text x="40" y="176" font-family="'SF Mono', Menlo, Consolas, monospace" font-size="12" font-weight="700" fill="#b7791f">PK</text>
-<text x="92" y="176" font-family="'SF Mono', Menlo, Consolas, monospace" font-size="13.5" font-weight="700" fill="#1a202c" text-decoration="underline">patient_id</text>
-<text x="230" y="176" font-family="'SF Mono', Menlo, Consolas, monospace" font-size="13" fill="#2b6cb0">INT UNSIGNED</text>
-<text x="490" y="176" font-family="'SF Mono', Menlo, Consolas, monospace" font-size="11.5" fill="#4a5568" text-anchor="end">NN, AUTO_INCREMENT</text>
-<rect x="32" y="186" width="466" height="30" fill="#f7fafc"/>
-<line x1="30" y1="186" x2="500" y2="186" stroke="#e2e8f0"/>
-<text x="92" y="206" font-family="'SF Mono', Menlo, Consolas, monospace" font-size="13.5" font-weight="400" fill="#1a202c">full_name</text>
-<text x="230" y="206" font-family="'SF Mono', Menlo, Consolas, monospace" font-size="13" fill="#2b6cb0">VARCHAR(100)</text>
-<text x="490" y="206" font-family="'SF Mono', Menlo, Consolas, monospace" font-size="11.5" fill="#4a5568" text-anchor="end">NN, CHK length &gt;= 2</text>
-<line x1="30" y1="216" x2="500" y2="216" stroke="#e2e8f0"/>
-<text x="40" y="236" font-family="'SF Mono', Menlo, Consolas, monospace" font-size="12" font-weight="700" fill="#6b46c1">UQ</text>
-<text x="92" y="236" font-family="'SF Mono', Menlo, Consolas, monospace" font-size="13.5" font-weight="400" fill="#1a202c">email</text>
-<text x="230" y="236" font-family="'SF Mono', Menlo, Consolas, monospace" font-size="13" fill="#2b6cb0">VARCHAR(255)</text>
-<text x="490" y="236" font-family="'SF Mono', Menlo, Consolas, monospace" font-size="11.5" fill="#4a5568" text-anchor="end">NN, UNIQUE</text>
-<rect x="32" y="246" width="466" height="30" fill="#f7fafc"/>
-<line x1="30" y1="246" x2="500" y2="246" stroke="#e2e8f0"/>
-<text x="92" y="266" font-family="'SF Mono', Menlo, Consolas, monospace" font-size="13.5" font-weight="400" fill="#1a202c">phone</text>
-<text x="230" y="266" font-family="'SF Mono', Menlo, Consolas, monospace" font-size="13" fill="#2b6cb0">VARCHAR(20)</text>
-<text x="490" y="266" font-family="'SF Mono', Menlo, Consolas, monospace" font-size="11.5" fill="#4a5568" text-anchor="end">NN</text>
-<line x1="30" y1="276" x2="500" y2="276" stroke="#e2e8f0"/>
-<text x="92" y="296" font-family="'SF Mono', Menlo, Consolas, monospace" font-size="13.5" font-weight="400" fill="#1a202c">created_at</text>
-<text x="230" y="296" font-family="'SF Mono', Menlo, Consolas, monospace" font-size="13" fill="#2b6cb0">DATETIME</text>
-<text x="490" y="296" font-family="'SF Mono', Menlo, Consolas, monospace" font-size="11.5" fill="#4a5568" text-anchor="end">NN, DEFAULT now</text>
-<rect x="32" y="306" width="466" height="30" fill="#f7fafc"/>
-<line x1="30" y1="306" x2="500" y2="306" stroke="#e2e8f0"/>
-<text x="92" y="326" font-family="'SF Mono', Menlo, Consolas, monospace" font-size="13.5" font-weight="400" fill="#1a202c">updated_at</text>
-<text x="230" y="326" font-family="'SF Mono', Menlo, Consolas, monospace" font-size="13" fill="#2b6cb0">DATETIME</text>
-<text x="490" y="326" font-family="'SF Mono', Menlo, Consolas, monospace" font-size="11.5" fill="#4a5568" text-anchor="end">NN, ON UPDATE now</text>
-<rect x="560" y="110" width="540" height="406" rx="8" fill="#ffffff" stroke="#6b46c1" stroke-width="2"/>
-<path d="M560 118 a8 8 0 0 1 8 -8 h524 a8 8 0 0 1 8 8 v38 h-540 z" fill="#6b46c1"/>
-<text x="574" y="140" font-family="-apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="19" font-weight="700" fill="#ffffff">appointments</text>
-<text x="570" y="176" font-family="'SF Mono', Menlo, Consolas, monospace" font-size="12" font-weight="700" fill="#b7791f">PK</text>
-<text x="622" y="176" font-family="'SF Mono', Menlo, Consolas, monospace" font-size="13.5" font-weight="700" fill="#1a202c" text-decoration="underline">appointment_id</text>
-<text x="760" y="176" font-family="'SF Mono', Menlo, Consolas, monospace" font-size="13" fill="#2b6cb0">INT UNSIGNED</text>
-<text x="1090" y="176" font-family="'SF Mono', Menlo, Consolas, monospace" font-size="11.5" fill="#4a5568" text-anchor="end">NN, AUTO_INCREMENT</text>
-<rect x="562" y="186" width="536" height="30" fill="#f7fafc"/>
-<line x1="560" y1="186" x2="1100" y2="186" stroke="#e2e8f0"/>
-<text x="570" y="206" font-family="'SF Mono', Menlo, Consolas, monospace" font-size="12" font-weight="700" fill="#c53030">FK U2</text>
-<text x="622" y="206" font-family="'SF Mono', Menlo, Consolas, monospace" font-size="13.5" font-weight="400" fill="#1a202c">patient_id</text>
-<text x="760" y="206" font-family="'SF Mono', Menlo, Consolas, monospace" font-size="13" fill="#2b6cb0">INT UNSIGNED</text>
-<text x="1090" y="206" font-family="'SF Mono', Menlo, Consolas, monospace" font-size="11.5" fill="#4a5568" text-anchor="end">NN -&gt; patients</text>
-<line x1="560" y1="216" x2="1100" y2="216" stroke="#e2e8f0"/>
-<text x="570" y="236" font-family="'SF Mono', Menlo, Consolas, monospace" font-size="12" font-weight="700" fill="#c53030">FK U1</text>
-<text x="622" y="236" font-family="'SF Mono', Menlo, Consolas, monospace" font-size="13.5" font-weight="400" fill="#1a202c">doctor_id</text>
-<text x="760" y="236" font-family="'SF Mono', Menlo, Consolas, monospace" font-size="13" fill="#2b6cb0">INT UNSIGNED</text>
-<text x="1090" y="236" font-family="'SF Mono', Menlo, Consolas, monospace" font-size="11.5" fill="#4a5568" text-anchor="end">NN -&gt; doctors</text>
-<rect x="562" y="246" width="536" height="30" fill="#f7fafc"/>
-<line x1="560" y1="246" x2="1100" y2="246" stroke="#e2e8f0"/>
-<text x="570" y="266" font-family="'SF Mono', Menlo, Consolas, monospace" font-size="12" font-weight="700" fill="#6b46c1">U1 U2</text>
-<text x="622" y="266" font-family="'SF Mono', Menlo, Consolas, monospace" font-size="13.5" font-weight="400" fill="#1a202c">appt_datetime</text>
-<text x="760" y="266" font-family="'SF Mono', Menlo, Consolas, monospace" font-size="13" fill="#2b6cb0">DATETIME</text>
-<text x="1090" y="266" font-family="'SF Mono', Menlo, Consolas, monospace" font-size="11.5" fill="#4a5568" text-anchor="end">NN, CHK slot + hours</text>
-<line x1="560" y1="276" x2="1100" y2="276" stroke="#e2e8f0"/>
-<text x="622" y="296" font-family="'SF Mono', Menlo, Consolas, monospace" font-size="13.5" font-weight="400" fill="#1a202c">amount_paid</text>
-<text x="760" y="296" font-family="'SF Mono', Menlo, Consolas, monospace" font-size="13" fill="#2b6cb0">DECIMAL(10,2)</text>
-<text x="1090" y="296" font-family="'SF Mono', Menlo, Consolas, monospace" font-size="11.5" fill="#4a5568" text-anchor="end">NN, CHK &gt;= 0</text>
-<rect x="562" y="306" width="536" height="30" fill="#f7fafc"/>
-<line x1="560" y1="306" x2="1100" y2="306" stroke="#e2e8f0"/>
-<text x="622" y="326" font-family="'SF Mono', Menlo, Consolas, monospace" font-size="13.5" font-weight="400" fill="#1a202c">status</text>
-<text x="760" y="326" font-family="'SF Mono', Menlo, Consolas, monospace" font-size="13" fill="#2b6cb0">ENUM(&#x27;BOOKED&#x27;,</text>
-<text x="1090" y="326" font-family="'SF Mono', Menlo, Consolas, monospace" font-size="11.5" fill="#4a5568" text-anchor="end">NN, DEFAULT &#x27;BOOKED&#x27;</text>
-<line x1="560" y1="336" x2="1100" y2="336" stroke="#e2e8f0"/>
-<text x="622" y="356" font-family="'SF Mono', Menlo, Consolas, monospace" font-size="13.5" font-weight="400" fill="#1a202c"></text>
-<text x="760" y="356" font-family="'SF Mono', Menlo, Consolas, monospace" font-size="13" fill="#2b6cb0">  &#x27;CANCELLED&#x27;)</text>
-<text x="1090" y="356" font-family="'SF Mono', Menlo, Consolas, monospace" font-size="11.5" fill="#4a5568" text-anchor="end"></text>
-<rect x="562" y="366" width="536" height="30" fill="#f7fafc"/>
-<line x1="560" y1="366" x2="1100" y2="366" stroke="#e2e8f0"/>
-<text x="622" y="386" font-family="'SF Mono', Menlo, Consolas, monospace" font-size="13.5" font-weight="400" fill="#1a202c">booked_at</text>
-<text x="760" y="386" font-family="'SF Mono', Menlo, Consolas, monospace" font-size="13" fill="#2b6cb0">DATETIME</text>
-<text x="1090" y="386" font-family="'SF Mono', Menlo, Consolas, monospace" font-size="11.5" fill="#4a5568" text-anchor="end">NN, DEFAULT now</text>
-<line x1="560" y1="396" x2="1100" y2="396" stroke="#e2e8f0"/>
-<text x="622" y="416" font-family="'SF Mono', Menlo, Consolas, monospace" font-size="13.5" font-weight="400" fill="#1a202c">cancelled_at</text>
-<text x="760" y="416" font-family="'SF Mono', Menlo, Consolas, monospace" font-size="13" fill="#2b6cb0">DATETIME</text>
-<text x="1090" y="416" font-family="'SF Mono', Menlo, Consolas, monospace" font-size="11.5" fill="#4a5568" text-anchor="end">NULL</text>
-<rect x="562" y="426" width="536" height="30" fill="#f7fafc"/>
-<line x1="560" y1="426" x2="1100" y2="426" stroke="#e2e8f0"/>
-<text x="622" y="446" font-family="'SF Mono', Menlo, Consolas, monospace" font-size="13.5" font-weight="400" fill="#1a202c">refund_percent</text>
-<text x="760" y="446" font-family="'SF Mono', Menlo, Consolas, monospace" font-size="13" fill="#2b6cb0">TINYINT UNSIGNED</text>
-<text x="1090" y="446" font-family="'SF Mono', Menlo, Consolas, monospace" font-size="11.5" fill="#4a5568" text-anchor="end">NULL, CHK IN (0,50,100)</text>
-<line x1="560" y1="456" x2="1100" y2="456" stroke="#e2e8f0"/>
-<text x="622" y="476" font-family="'SF Mono', Menlo, Consolas, monospace" font-size="13.5" font-weight="400" fill="#1a202c">refund_amount</text>
-<text x="760" y="476" font-family="'SF Mono', Menlo, Consolas, monospace" font-size="13" fill="#2b6cb0">DECIMAL(10,2)</text>
-<text x="1090" y="476" font-family="'SF Mono', Menlo, Consolas, monospace" font-size="11.5" fill="#4a5568" text-anchor="end">NULL, CHK 0..amount_paid</text>
-<rect x="562" y="486" width="536" height="30" fill="#f7fafc"/>
-<line x1="560" y1="486" x2="1100" y2="486" stroke="#e2e8f0"/>
-<text x="570" y="506" font-family="'SF Mono', Menlo, Consolas, monospace" font-size="12" font-weight="700" fill="#6b46c1">U1 U2</text>
-<text x="622" y="506" font-family="'SF Mono', Menlo, Consolas, monospace" font-size="13.5" font-weight="400" fill="#1a202c">active_flag</text>
-<text x="760" y="506" font-family="'SF Mono', Menlo, Consolas, monospace" font-size="13" fill="#2b6cb0">TINYINT UNSIGNED</text>
-<text x="1090" y="506" font-family="'SF Mono', Menlo, Consolas, monospace" font-size="11.5" fill="#4a5568" text-anchor="end">GENERATED STORED</text>
-<rect x="1160" y="110" width="450" height="256" rx="8" fill="#ffffff" stroke="#2f855a" stroke-width="2"/>
-<path d="M1160 118 a8 8 0 0 1 8 -8 h434 a8 8 0 0 1 8 8 v38 h-450 z" fill="#2f855a"/>
-<text x="1174" y="140" font-family="-apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="19" font-weight="700" fill="#ffffff">doctors</text>
-<text x="1170" y="176" font-family="'SF Mono', Menlo, Consolas, monospace" font-size="12" font-weight="700" fill="#b7791f">PK</text>
-<text x="1222" y="176" font-family="'SF Mono', Menlo, Consolas, monospace" font-size="13.5" font-weight="700" fill="#1a202c" text-decoration="underline">doctor_id</text>
-<text x="1360" y="176" font-family="'SF Mono', Menlo, Consolas, monospace" font-size="13" fill="#2b6cb0">INT UNSIGNED</text>
-<text x="1600" y="176" font-family="'SF Mono', Menlo, Consolas, monospace" font-size="11.5" fill="#4a5568" text-anchor="end">NN, AUTO_INCREMENT</text>
-<rect x="1162" y="186" width="446" height="30" fill="#f7fafc"/>
-<line x1="1160" y1="186" x2="1610" y2="186" stroke="#e2e8f0"/>
-<text x="1222" y="206" font-family="'SF Mono', Menlo, Consolas, monospace" font-size="13.5" font-weight="400" fill="#1a202c">full_name</text>
-<text x="1360" y="206" font-family="'SF Mono', Menlo, Consolas, monospace" font-size="13" fill="#2b6cb0">VARCHAR(100)</text>
-<text x="1600" y="206" font-family="'SF Mono', Menlo, Consolas, monospace" font-size="11.5" fill="#4a5568" text-anchor="end">NN, CHK length &gt;= 2</text>
-<line x1="1160" y1="216" x2="1610" y2="216" stroke="#e2e8f0"/>
-<text x="1222" y="236" font-family="'SF Mono', Menlo, Consolas, monospace" font-size="13.5" font-weight="400" fill="#1a202c">specialty</text>
-<text x="1360" y="236" font-family="'SF Mono', Menlo, Consolas, monospace" font-size="13" fill="#2b6cb0">VARCHAR(100)</text>
-<text x="1600" y="236" font-family="'SF Mono', Menlo, Consolas, monospace" font-size="11.5" fill="#4a5568" text-anchor="end">NN</text>
-<rect x="1162" y="246" width="446" height="30" fill="#f7fafc"/>
-<line x1="1160" y1="246" x2="1610" y2="246" stroke="#e2e8f0"/>
-<text x="1222" y="266" font-family="'SF Mono', Menlo, Consolas, monospace" font-size="13.5" font-weight="400" fill="#1a202c">consultation_fee</text>
-<text x="1360" y="266" font-family="'SF Mono', Menlo, Consolas, monospace" font-size="13" fill="#2b6cb0">DECIMAL(10,2)</text>
-<text x="1600" y="266" font-family="'SF Mono', Menlo, Consolas, monospace" font-size="11.5" fill="#4a5568" text-anchor="end">NN, CHK &gt;= 0</text>
-<line x1="1160" y1="276" x2="1610" y2="276" stroke="#e2e8f0"/>
-<text x="1222" y="296" font-family="'SF Mono', Menlo, Consolas, monospace" font-size="13.5" font-weight="400" fill="#1a202c">room</text>
-<text x="1360" y="296" font-family="'SF Mono', Menlo, Consolas, monospace" font-size="13" fill="#2b6cb0">VARCHAR(10)</text>
-<text x="1600" y="296" font-family="'SF Mono', Menlo, Consolas, monospace" font-size="11.5" fill="#4a5568" text-anchor="end">NN</text>
-<rect x="1162" y="306" width="446" height="30" fill="#f7fafc"/>
-<line x1="1160" y1="306" x2="1610" y2="306" stroke="#e2e8f0"/>
-<text x="1222" y="326" font-family="'SF Mono', Menlo, Consolas, monospace" font-size="13.5" font-weight="400" fill="#1a202c">created_at</text>
-<text x="1360" y="326" font-family="'SF Mono', Menlo, Consolas, monospace" font-size="13" fill="#2b6cb0">DATETIME</text>
-<text x="1600" y="326" font-family="'SF Mono', Menlo, Consolas, monospace" font-size="11.5" fill="#4a5568" text-anchor="end">NN, DEFAULT now</text>
-<line x1="1160" y1="336" x2="1610" y2="336" stroke="#e2e8f0"/>
-<text x="1222" y="356" font-family="'SF Mono', Menlo, Consolas, monospace" font-size="13.5" font-weight="400" fill="#1a202c">updated_at</text>
-<text x="1360" y="356" font-family="'SF Mono', Menlo, Consolas, monospace" font-size="13" fill="#2b6cb0">DATETIME</text>
-<text x="1600" y="356" font-family="'SF Mono', Menlo, Consolas, monospace" font-size="11.5" fill="#4a5568" text-anchor="end">NN, ON UPDATE now</text>
-<path d="M500 171.0 H530.0 V201.0 H560" fill="none" stroke="#2d3748" stroke-width="2"/>
-<line x1="510" y1="162.0" x2="510" y2="180.0" stroke="#2d3748" stroke-width="2"/>
-<line x1="518" y1="162.0" x2="518" y2="180.0" stroke="#2d3748" stroke-width="2"/>
-<line x1="544" y1="201.0" x2="560" y2="191.0" stroke="#2d3748" stroke-width="2"/>
-<line x1="544" y1="201.0" x2="560" y2="201.0" stroke="#2d3748" stroke-width="2"/>
-<line x1="544" y1="201.0" x2="560" y2="211.0" stroke="#2d3748" stroke-width="2"/>
-<circle cx="534" cy="201.0" r="6" fill="#ffffff" stroke="#2d3748" stroke-width="2"/>
-<text x="530.0" y="161.0" font-family="-apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="14" font-weight="700" fill="#1a202c" text-anchor="middle">1 : N</text>
-<path d="M1160 171.0 H1130.0 V231.0 H1100" fill="none" stroke="#2d3748" stroke-width="2"/>
-<line x1="1150" y1="162.0" x2="1150" y2="180.0" stroke="#2d3748" stroke-width="2"/>
-<line x1="1142" y1="162.0" x2="1142" y2="180.0" stroke="#2d3748" stroke-width="2"/>
-<line x1="1116" y1="231.0" x2="1100" y2="221.0" stroke="#2d3748" stroke-width="2"/>
-<line x1="1116" y1="231.0" x2="1100" y2="231.0" stroke="#2d3748" stroke-width="2"/>
-<line x1="1116" y1="231.0" x2="1100" y2="241.0" stroke="#2d3748" stroke-width="2"/>
-<circle cx="1126" cy="231.0" r="6" fill="#ffffff" stroke="#2d3748" stroke-width="2"/>
-<text x="1130.0" y="161.0" font-family="-apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="14" font-weight="700" fill="#1a202c" text-anchor="middle">1 : N</text>
-<text x="30" y="366" font-family="-apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="14" fill="#2d3748">One patient has zero or many appointments;</text>
-<text x="30" y="386" font-family="-apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="14" fill="#2d3748">each appointment belongs to exactly one patient.</text>
-<text x="1160" y="396" font-family="-apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="14" fill="#2d3748">One doctor has zero or many appointments;</text>
-<text x="1160" y="416" font-family="-apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="14" fill="#2d3748">each appointment is with exactly one doctor.</text>
-<text x="1160" y="466" font-family="-apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="13" font-weight="700" fill="#2d3748">Notation</text>
-<line x1="1170" y1="479" x2="1170" y2="497" stroke="#2d3748" stroke-width="2"/>
-<line x1="1178" y1="479" x2="1178" y2="497" stroke="#2d3748" stroke-width="2"/>
-<line x1="1160" y1="488" x2="1200" y2="488" stroke="#2d3748" stroke-width="2"/>
-<text x="1212" y="493" font-family="-apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="13" fill="#2d3748">exactly one</text>
-<line x1="1160" y1="518" x2="1200" y2="518" stroke="#2d3748" stroke-width="2"/>
-<line x1="1184" y1="518" x2="1200" y2="508" stroke="#2d3748" stroke-width="2"/>
-<line x1="1184" y1="518" x2="1200" y2="518" stroke="#2d3748" stroke-width="2"/>
-<line x1="1184" y1="518" x2="1200" y2="528" stroke="#2d3748" stroke-width="2"/>
-<circle cx="1174" cy="518" r="6" fill="#ffffff" stroke="#2d3748" stroke-width="2"/>
-<text x="1212" y="523" font-family="-apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="13" fill="#2d3748">zero or many</text>
-<rect x="30" y="545" width="1580" height="470" rx="8" fill="#faf5ff" stroke="#d6bcfa"/>
-<text x="50" y="579" font-family="-apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="18" font-weight="700" fill="#44337a">Business-rule constraints (all implemented in database/schema.sql)</text>
-<rect x="50" y="597" width="1540" height="76" rx="6" fill="#ffffff" stroke="#6b46c1" stroke-width="2"/>
-<text x="66" y="623" font-family="'SF Mono', Menlo, Consolas, monospace" font-size="14" font-weight="700" fill="#6b46c1">U1  uq_doctor_active_slot  UNIQUE (doctor_id, appt_datetime, active_flag)</text>
-<text x="66" y="647" font-family="-apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="14" fill="#1a202c">A doctor can never have two appointments at the same date/time. active_flag = 1 while BOOKED and NULL once CANCELLED;</text>
-<text x="66" y="665" font-family="-apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="14" fill="#1a202c">UNIQUE ignores NULLs, so a cancelled row is kept for refund history but no longer blocks the slot (it becomes rebookable).</text>
-<text x="66" y="707" font-family="'SF Mono', Menlo, Consolas, monospace" font-size="12.5" font-weight="700" fill="#6b46c1">U2</text>
-<text x="112" y="707" font-family="'SF Mono', Menlo, Consolas, monospace" font-size="12.5" font-weight="700" fill="#1a202c">uq_patient_active_slot</text>
-<text x="400" y="707" font-family="'SF Mono', Menlo, Consolas, monospace" font-size="12.5" fill="#2d3748">UNIQUE (patient_id, appt_datetime, active_flag) - a patient cannot be booked twice at the same time</text>
-<text x="66" y="731" font-family="'SF Mono', Menlo, Consolas, monospace" font-size="12.5" font-weight="700" fill="#2b6cb0">CHK</text>
-<text x="112" y="731" font-family="'SF Mono', Menlo, Consolas, monospace" font-size="12.5" font-weight="700" fill="#1a202c">chk_appt_slot_boundary</text>
-<text x="400" y="731" font-family="'SF Mono', Menlo, Consolas, monospace" font-size="12.5" fill="#2d3748">MINUTE(appt_datetime) IN (0, 30) AND SECOND(appt_datetime) = 0 - 30-minute slots</text>
-<text x="66" y="755" font-family="'SF Mono', Menlo, Consolas, monospace" font-size="12.5" font-weight="700" fill="#2b6cb0">CHK</text>
-<text x="112" y="755" font-family="'SF Mono', Menlo, Consolas, monospace" font-size="12.5" font-weight="700" fill="#1a202c">chk_appt_working_hours</text>
-<text x="400" y="755" font-family="'SF Mono', Menlo, Consolas, monospace" font-size="12.5" fill="#2d3748">TIME(appt_datetime) BETWEEN &#x27;09:00:00&#x27; AND &#x27;16:30:00&#x27; - last slot ends at 17:00</text>
-<text x="66" y="779" font-family="'SF Mono', Menlo, Consolas, monospace" font-size="12.5" font-weight="700" fill="#2b6cb0">CHK</text>
-<text x="112" y="779" font-family="'SF Mono', Menlo, Consolas, monospace" font-size="12.5" font-weight="700" fill="#1a202c">chk_appt_amount_paid</text>
-<text x="400" y="779" font-family="'SF Mono', Menlo, Consolas, monospace" font-size="12.5" fill="#2d3748">amount_paid &gt;= 0</text>
-<text x="66" y="803" font-family="'SF Mono', Menlo, Consolas, monospace" font-size="12.5" font-weight="700" fill="#2b6cb0">CHK</text>
-<text x="112" y="803" font-family="'SF Mono', Menlo, Consolas, monospace" font-size="12.5" font-weight="700" fill="#1a202c">chk_appt_refund_percent</text>
-<text x="400" y="803" font-family="'SF Mono', Menlo, Consolas, monospace" font-size="12.5" fill="#2d3748">refund_percent IN (0, 50, 100) - the three refund tiers</text>
-<text x="66" y="827" font-family="'SF Mono', Menlo, Consolas, monospace" font-size="12.5" font-weight="700" fill="#2b6cb0">CHK</text>
-<text x="112" y="827" font-family="'SF Mono', Menlo, Consolas, monospace" font-size="12.5" font-weight="700" fill="#1a202c">chk_appt_refund_amount</text>
-<text x="400" y="827" font-family="'SF Mono', Menlo, Consolas, monospace" font-size="12.5" fill="#2d3748">refund_amount BETWEEN 0 AND amount_paid</text>
-<text x="66" y="851" font-family="'SF Mono', Menlo, Consolas, monospace" font-size="12.5" font-weight="700" fill="#2b6cb0">CHK</text>
-<text x="112" y="851" font-family="'SF Mono', Menlo, Consolas, monospace" font-size="12.5" font-weight="700" fill="#1a202c">chk_appt_cancellation_record</text>
-<text x="400" y="851" font-family="'SF Mono', Menlo, Consolas, monospace" font-size="12.5" fill="#2d3748">BOOKED =&gt; cancelled_at, refund_percent, refund_amount all NULL;  CANCELLED =&gt; all three NOT NULL</text>
-<text x="66" y="875" font-family="'SF Mono', Menlo, Consolas, monospace" font-size="12.5" font-weight="700" fill="#c53030">FK</text>
-<text x="112" y="875" font-family="'SF Mono', Menlo, Consolas, monospace" font-size="12.5" font-weight="700" fill="#1a202c">fk_appointments_patient</text>
-<text x="400" y="875" font-family="'SF Mono', Menlo, Consolas, monospace" font-size="12.5" fill="#2d3748">patient_id -&gt; patients(patient_id)  ON DELETE RESTRICT (history is never orphaned)</text>
-<text x="66" y="899" font-family="'SF Mono', Menlo, Consolas, monospace" font-size="12.5" font-weight="700" fill="#c53030">FK</text>
-<text x="112" y="899" font-family="'SF Mono', Menlo, Consolas, monospace" font-size="12.5" font-weight="700" fill="#1a202c">fk_appointments_doctor</text>
-<text x="400" y="899" font-family="'SF Mono', Menlo, Consolas, monospace" font-size="12.5" fill="#2d3748">doctor_id -&gt; doctors(doctor_id)  ON DELETE RESTRICT</text>
-<text x="66" y="923" font-family="'SF Mono', Menlo, Consolas, monospace" font-size="12.5" font-weight="700" fill="#6b46c1">UQ</text>
-<text x="112" y="923" font-family="'SF Mono', Menlo, Consolas, monospace" font-size="12.5" font-weight="700" fill="#1a202c">uq_patients_email</text>
-<text x="400" y="923" font-family="'SF Mono', Menlo, Consolas, monospace" font-size="12.5" fill="#2d3748">UNIQUE (email) on patients;  CHK chk_doctors_fee: consultation_fee &gt;= 0</text>
-<text x="50" y="961" font-family="-apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="13.5" fill="#44337a"><tspan font-weight="700">Enforced in application code</tspan> (cannot be a CHECK): bookings must be in the future (NOW() is not allowed in CHECK) and at most 12 BOOKED</text>
-<text x="50" y="980" font-family="-apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="13.5" fill="#44337a">appointments per doctor per day (needs a count across rows) - checked inside a transaction that locks the doctor row.</text>
+<svg xmlns="http://www.w3.org/2000/svg" width="1660" height="990" viewBox="0 0 1660 990">
+<defs><filter id="sh" x="-5%" y="-5%" width="110%" height="115%"><feDropShadow dx="0" dy="3" stdDeviation="5" flood-color="#0f172a" flood-opacity="0.08"/></filter></defs>
+<rect width="1660" height="990" fill="#fbfaf7"/>
+<text x="40" y="62" font-family="-apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="30" font-weight="700" fill="#0f172a">MediBook database</text>
+<text x="40" y="94" font-family="-apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="16" fill="#475569">Three tables in third normal form (3NF). Each patient and each doctor can have many appointments.</text>
+<text x="40" y="126" font-family="-apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="13" fill="#64748b">Key:</text>
+<rect x="80" y="113" width="29.2" height="18" rx="9" fill="#fef3c7"/>
+<text x="94.6" y="126" font-family="'SF Mono', Menlo, Consolas, monospace" font-size="11" font-weight="700" fill="#92400e" text-anchor="middle">PK</text>
+<text x="115.2" y="126" font-family="-apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="13" fill="#475569">primary key</text>
+<rect x="209.8" y="113" width="29.2" height="18" rx="9" fill="#ffe4e6"/>
+<text x="224.4" y="126" font-family="'SF Mono', Menlo, Consolas, monospace" font-size="11" font-weight="700" fill="#9f1239" text-anchor="middle">FK</text>
+<text x="245.0" y="126" font-family="-apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="13" fill="#475569">foreign key</text>
+<rect x="339.6" y="113" width="29.2" height="18" rx="9" fill="#ede9fe"/>
+<text x="354.20000000000005" y="126" font-family="'SF Mono', Menlo, Consolas, monospace" font-size="11" font-weight="700" fill="#5b21b6" text-anchor="middle">UQ</text>
+<text x="374.8" y="126" font-family="-apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="13" fill="#475569">unique</text>
+<rect x="436.40000000000003" y="113" width="29.2" height="18" rx="9" fill="#ede9fe"/>
+<text x="451.00000000000006" y="126" font-family="'SF Mono', Menlo, Consolas, monospace" font-size="11" font-weight="700" fill="#5b21b6" text-anchor="middle">U1</text>
+<text x="471.6" y="126" font-family="-apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="13" fill="#475569">/ U2 unique together</text>
+<rect x="625.6" y="113" width="29.2" height="18" rx="9" fill="#f1f5f9"/>
+<text x="640.2" y="126" font-family="'SF Mono', Menlo, Consolas, monospace" font-size="11" font-weight="700" fill="#334155" text-anchor="middle">NN</text>
+<text x="660.8000000000001" y="126" font-family="-apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="13" fill="#475569">NOT NULL (required)</text>
+<rect x="808.2" y="113" width="36.8" height="18" rx="9" fill="#e0f2fe"/>
+<text x="826.6" y="126" font-family="'SF Mono', Menlo, Consolas, monospace" font-size="11" font-weight="700" fill="#075985" text-anchor="middle">CHK</text>
+<text x="851.0" y="126" font-family="-apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="13" fill="#475569">CHECK rule</text>
+<rect x="939.0" y="113" width="36.8" height="18" rx="9" fill="#f1f5f9"/>
+<text x="957.4" y="126" font-family="'SF Mono', Menlo, Consolas, monospace" font-size="11" font-weight="700" fill="#334155" text-anchor="middle">GEN</text>
+<text x="981.8" y="126" font-family="-apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="13" fill="#475569">generated column</text>
+<rect x="40" y="150" width="420" height="266" rx="14" fill="#ffffff" stroke="#93c5fd" stroke-width="1.5" filter="url(#sh)"/>
+<path d="M40 164 a14 14 0 0 1 14 -14 h392 a14 14 0 0 1 14 14 v52 h-420 z" fill="#dbeafe"/>
+<text x="58" y="180" font-family="-apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="20" font-weight="700" fill="#1e3a8a">patients</text>
+<text x="58" y="202" font-family="-apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="13" fill="#1e3a8a" opacity="0.8">People who book appointments</text>
+<text x="58" y="237" font-family="-apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="14.5" font-weight="700" fill="#0f172a" text-decoration="underline">patient_id</text>
+<text x="212" y="237" font-family="'SF Mono', Menlo, Consolas, monospace" font-size="12.5" fill="#64748b">INT UNSIGNED</text>
+<rect x="416.8" y="224" width="27.2" height="17" rx="8.5" fill="#f1f5f9"/>
+<text x="430.40000000000003" y="236.5" font-family="'SF Mono', Menlo, Consolas, monospace" font-size="10.5" font-weight="700" fill="#334155" text-anchor="middle">NN</text>
+<rect x="384.6" y="224" width="27.2" height="17" rx="8.5" fill="#fef3c7"/>
+<text x="398.20000000000005" y="236.5" font-family="'SF Mono', Menlo, Consolas, monospace" font-size="10.5" font-weight="700" fill="#92400e" text-anchor="middle">PK</text>
+<line x1="52" y1="248" x2="448" y2="248" stroke="#f1f5f9"/>
+<text x="58" y="269" font-family="-apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="14.5" font-weight="500" fill="#0f172a">full_name</text>
+<text x="212" y="269" font-family="'SF Mono', Menlo, Consolas, monospace" font-size="12.5" fill="#64748b">VARCHAR(100)</text>
+<rect x="409.2" y="256" width="34.8" height="17" rx="8.5" fill="#e0f2fe"/>
+<text x="426.59999999999997" y="268.5" font-family="'SF Mono', Menlo, Consolas, monospace" font-size="10.5" font-weight="700" fill="#075985" text-anchor="middle">CHK</text>
+<rect x="377.0" y="256" width="27.2" height="17" rx="8.5" fill="#f1f5f9"/>
+<text x="390.6" y="268.5" font-family="'SF Mono', Menlo, Consolas, monospace" font-size="10.5" font-weight="700" fill="#334155" text-anchor="middle">NN</text>
+<line x1="52" y1="280" x2="448" y2="280" stroke="#f1f5f9"/>
+<text x="58" y="301" font-family="-apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="14.5" font-weight="500" fill="#0f172a">email</text>
+<text x="212" y="301" font-family="'SF Mono', Menlo, Consolas, monospace" font-size="12.5" fill="#64748b">VARCHAR(255)</text>
+<rect x="416.8" y="288" width="27.2" height="17" rx="8.5" fill="#f1f5f9"/>
+<text x="430.40000000000003" y="300.5" font-family="'SF Mono', Menlo, Consolas, monospace" font-size="10.5" font-weight="700" fill="#334155" text-anchor="middle">NN</text>
+<rect x="384.6" y="288" width="27.2" height="17" rx="8.5" fill="#ede9fe"/>
+<text x="398.20000000000005" y="300.5" font-family="'SF Mono', Menlo, Consolas, monospace" font-size="10.5" font-weight="700" fill="#5b21b6" text-anchor="middle">UQ</text>
+<line x1="52" y1="312" x2="448" y2="312" stroke="#f1f5f9"/>
+<text x="58" y="333" font-family="-apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="14.5" font-weight="500" fill="#0f172a">phone</text>
+<text x="212" y="333" font-family="'SF Mono', Menlo, Consolas, monospace" font-size="12.5" fill="#64748b">VARCHAR(20)</text>
+<rect x="416.8" y="320" width="27.2" height="17" rx="8.5" fill="#f1f5f9"/>
+<text x="430.40000000000003" y="332.5" font-family="'SF Mono', Menlo, Consolas, monospace" font-size="10.5" font-weight="700" fill="#334155" text-anchor="middle">NN</text>
+<line x1="52" y1="344" x2="448" y2="344" stroke="#f1f5f9"/>
+<text x="58" y="365" font-family="-apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="14.5" font-weight="500" fill="#0f172a">created_at</text>
+<text x="212" y="365" font-family="'SF Mono', Menlo, Consolas, monospace" font-size="12.5" fill="#64748b">DATETIME</text>
+<rect x="416.8" y="352" width="27.2" height="17" rx="8.5" fill="#f1f5f9"/>
+<text x="430.40000000000003" y="364.5" font-family="'SF Mono', Menlo, Consolas, monospace" font-size="10.5" font-weight="700" fill="#334155" text-anchor="middle">NN</text>
+<line x1="52" y1="376" x2="448" y2="376" stroke="#f1f5f9"/>
+<text x="58" y="397" font-family="-apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="14.5" font-weight="500" fill="#0f172a">updated_at</text>
+<text x="212" y="397" font-family="'SF Mono', Menlo, Consolas, monospace" font-size="12.5" fill="#64748b">DATETIME</text>
+<rect x="416.8" y="384" width="27.2" height="17" rx="8.5" fill="#f1f5f9"/>
+<text x="430.40000000000003" y="396.5" font-family="'SF Mono', Menlo, Consolas, monospace" font-size="10.5" font-weight="700" fill="#334155" text-anchor="middle">NN</text>
+<rect x="560" y="150" width="560" height="426" rx="14" fill="#ffffff" stroke="#c4b5fd" stroke-width="1.5" filter="url(#sh)"/>
+<path d="M560 164 a14 14 0 0 1 14 -14 h532 a14 14 0 0 1 14 14 v52 h-560 z" fill="#ede9fe"/>
+<text x="578" y="180" font-family="-apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="20" font-weight="700" fill="#4c1d95">appointments</text>
+<text x="578" y="202" font-family="-apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="13" fill="#4c1d95" opacity="0.8">A booking: one patient, one doctor, one time slot</text>
+<text x="578" y="237" font-family="-apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="14.5" font-weight="700" fill="#0f172a" text-decoration="underline">appointment_id</text>
+<text x="732" y="237" font-family="'SF Mono', Menlo, Consolas, monospace" font-size="12.5" fill="#64748b">INT UNSIGNED</text>
+<rect x="1076.8" y="224" width="27.2" height="17" rx="8.5" fill="#f1f5f9"/>
+<text x="1090.3999999999999" y="236.5" font-family="'SF Mono', Menlo, Consolas, monospace" font-size="10.5" font-weight="700" fill="#334155" text-anchor="middle">NN</text>
+<rect x="1044.6" y="224" width="27.2" height="17" rx="8.5" fill="#fef3c7"/>
+<text x="1058.1999999999998" y="236.5" font-family="'SF Mono', Menlo, Consolas, monospace" font-size="10.5" font-weight="700" fill="#92400e" text-anchor="middle">PK</text>
+<line x1="572" y1="248" x2="1108" y2="248" stroke="#f1f5f9"/>
+<text x="578" y="269" font-family="-apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="14.5" font-weight="500" fill="#0f172a">patient_id</text>
+<text x="732" y="269" font-family="'SF Mono', Menlo, Consolas, monospace" font-size="12.5" fill="#64748b">INT UNSIGNED</text>
+<rect x="1076.8" y="256" width="27.2" height="17" rx="8.5" fill="#f1f5f9"/>
+<text x="1090.3999999999999" y="268.5" font-family="'SF Mono', Menlo, Consolas, monospace" font-size="10.5" font-weight="700" fill="#334155" text-anchor="middle">NN</text>
+<rect x="1044.6" y="256" width="27.2" height="17" rx="8.5" fill="#ede9fe"/>
+<text x="1058.1999999999998" y="268.5" font-family="'SF Mono', Menlo, Consolas, monospace" font-size="10.5" font-weight="700" fill="#5b21b6" text-anchor="middle">U2</text>
+<rect x="1012.3999999999999" y="256" width="27.2" height="17" rx="8.5" fill="#ffe4e6"/>
+<text x="1025.9999999999998" y="268.5" font-family="'SF Mono', Menlo, Consolas, monospace" font-size="10.5" font-weight="700" fill="#9f1239" text-anchor="middle">FK</text>
+<line x1="572" y1="280" x2="1108" y2="280" stroke="#f1f5f9"/>
+<text x="578" y="301" font-family="-apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="14.5" font-weight="500" fill="#0f172a">doctor_id</text>
+<text x="732" y="301" font-family="'SF Mono', Menlo, Consolas, monospace" font-size="12.5" fill="#64748b">INT UNSIGNED</text>
+<rect x="1076.8" y="288" width="27.2" height="17" rx="8.5" fill="#f1f5f9"/>
+<text x="1090.3999999999999" y="300.5" font-family="'SF Mono', Menlo, Consolas, monospace" font-size="10.5" font-weight="700" fill="#334155" text-anchor="middle">NN</text>
+<rect x="1044.6" y="288" width="27.2" height="17" rx="8.5" fill="#ede9fe"/>
+<text x="1058.1999999999998" y="300.5" font-family="'SF Mono', Menlo, Consolas, monospace" font-size="10.5" font-weight="700" fill="#5b21b6" text-anchor="middle">U1</text>
+<rect x="1012.3999999999999" y="288" width="27.2" height="17" rx="8.5" fill="#ffe4e6"/>
+<text x="1025.9999999999998" y="300.5" font-family="'SF Mono', Menlo, Consolas, monospace" font-size="10.5" font-weight="700" fill="#9f1239" text-anchor="middle">FK</text>
+<line x1="572" y1="312" x2="1108" y2="312" stroke="#f1f5f9"/>
+<text x="578" y="333" font-family="-apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="14.5" font-weight="500" fill="#0f172a">appt_datetime</text>
+<text x="732" y="333" font-family="'SF Mono', Menlo, Consolas, monospace" font-size="12.5" fill="#64748b">DATETIME</text>
+<rect x="1069.2" y="320" width="34.8" height="17" rx="8.5" fill="#e0f2fe"/>
+<text x="1086.6000000000001" y="332.5" font-family="'SF Mono', Menlo, Consolas, monospace" font-size="10.5" font-weight="700" fill="#075985" text-anchor="middle">CHK</text>
+<rect x="1037.0" y="320" width="27.2" height="17" rx="8.5" fill="#f1f5f9"/>
+<text x="1050.6" y="332.5" font-family="'SF Mono', Menlo, Consolas, monospace" font-size="10.5" font-weight="700" fill="#334155" text-anchor="middle">NN</text>
+<rect x="1004.8" y="320" width="27.2" height="17" rx="8.5" fill="#ede9fe"/>
+<text x="1018.4" y="332.5" font-family="'SF Mono', Menlo, Consolas, monospace" font-size="10.5" font-weight="700" fill="#5b21b6" text-anchor="middle">U2</text>
+<rect x="972.5999999999999" y="320" width="27.2" height="17" rx="8.5" fill="#ede9fe"/>
+<text x="986.1999999999999" y="332.5" font-family="'SF Mono', Menlo, Consolas, monospace" font-size="10.5" font-weight="700" fill="#5b21b6" text-anchor="middle">U1</text>
+<line x1="572" y1="344" x2="1108" y2="344" stroke="#f1f5f9"/>
+<text x="578" y="365" font-family="-apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="14.5" font-weight="500" fill="#0f172a">amount_paid</text>
+<text x="732" y="365" font-family="'SF Mono', Menlo, Consolas, monospace" font-size="12.5" fill="#64748b">DECIMAL(10,2)</text>
+<rect x="1069.2" y="352" width="34.8" height="17" rx="8.5" fill="#e0f2fe"/>
+<text x="1086.6000000000001" y="364.5" font-family="'SF Mono', Menlo, Consolas, monospace" font-size="10.5" font-weight="700" fill="#075985" text-anchor="middle">CHK</text>
+<rect x="1037.0" y="352" width="27.2" height="17" rx="8.5" fill="#f1f5f9"/>
+<text x="1050.6" y="364.5" font-family="'SF Mono', Menlo, Consolas, monospace" font-size="10.5" font-weight="700" fill="#334155" text-anchor="middle">NN</text>
+<line x1="572" y1="376" x2="1108" y2="376" stroke="#f1f5f9"/>
+<text x="578" y="397" font-family="-apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="14.5" font-weight="500" fill="#0f172a">status</text>
+<text x="732" y="397" font-family="'SF Mono', Menlo, Consolas, monospace" font-size="12.5" fill="#64748b">ENUM(&#x27;BOOKED&#x27;,&#x27;CANCELLED&#x27;)</text>
+<rect x="1076.8" y="384" width="27.2" height="17" rx="8.5" fill="#f1f5f9"/>
+<text x="1090.3999999999999" y="396.5" font-family="'SF Mono', Menlo, Consolas, monospace" font-size="10.5" font-weight="700" fill="#334155" text-anchor="middle">NN</text>
+<line x1="572" y1="408" x2="1108" y2="408" stroke="#f1f5f9"/>
+<text x="578" y="429" font-family="-apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="14.5" font-weight="500" fill="#0f172a">booked_at</text>
+<text x="732" y="429" font-family="'SF Mono', Menlo, Consolas, monospace" font-size="12.5" fill="#64748b">DATETIME</text>
+<rect x="1076.8" y="416" width="27.2" height="17" rx="8.5" fill="#f1f5f9"/>
+<text x="1090.3999999999999" y="428.5" font-family="'SF Mono', Menlo, Consolas, monospace" font-size="10.5" font-weight="700" fill="#334155" text-anchor="middle">NN</text>
+<line x1="572" y1="440" x2="1108" y2="440" stroke="#f1f5f9"/>
+<text x="578" y="461" font-family="-apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="14.5" font-weight="500" fill="#0f172a">cancelled_at</text>
+<text x="732" y="461" font-family="'SF Mono', Menlo, Consolas, monospace" font-size="12.5" fill="#64748b">DATETIME</text>
+<text x="1104" y="461" font-family="-apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="12" fill="#94a3b8" text-anchor="end" font-style="italic">optional</text>
+<line x1="572" y1="472" x2="1108" y2="472" stroke="#f1f5f9"/>
+<text x="578" y="493" font-family="-apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="14.5" font-weight="500" fill="#0f172a">refund_percent</text>
+<text x="732" y="493" font-family="'SF Mono', Menlo, Consolas, monospace" font-size="12.5" fill="#64748b">TINYINT UNSIGNED</text>
+<rect x="1069.2" y="480" width="34.8" height="17" rx="8.5" fill="#e0f2fe"/>
+<text x="1086.6000000000001" y="492.5" font-family="'SF Mono', Menlo, Consolas, monospace" font-size="10.5" font-weight="700" fill="#075985" text-anchor="middle">CHK</text>
+<line x1="572" y1="504" x2="1108" y2="504" stroke="#f1f5f9"/>
+<text x="578" y="525" font-family="-apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="14.5" font-weight="500" fill="#0f172a">refund_amount</text>
+<text x="732" y="525" font-family="'SF Mono', Menlo, Consolas, monospace" font-size="12.5" fill="#64748b">DECIMAL(10,2)</text>
+<rect x="1069.2" y="512" width="34.8" height="17" rx="8.5" fill="#e0f2fe"/>
+<text x="1086.6000000000001" y="524.5" font-family="'SF Mono', Menlo, Consolas, monospace" font-size="10.5" font-weight="700" fill="#075985" text-anchor="middle">CHK</text>
+<line x1="572" y1="536" x2="1108" y2="536" stroke="#f1f5f9"/>
+<text x="578" y="557" font-family="-apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="14.5" font-weight="500" fill="#0f172a">active_flag</text>
+<text x="732" y="557" font-family="'SF Mono', Menlo, Consolas, monospace" font-size="12.5" fill="#64748b">TINYINT UNSIGNED</text>
+<rect x="1069.2" y="544" width="34.8" height="17" rx="8.5" fill="#f1f5f9"/>
+<text x="1086.6000000000001" y="556.5" font-family="'SF Mono', Menlo, Consolas, monospace" font-size="10.5" font-weight="700" fill="#334155" text-anchor="middle">GEN</text>
+<rect x="1037.0" y="544" width="27.2" height="17" rx="8.5" fill="#ede9fe"/>
+<text x="1050.6" y="556.5" font-family="'SF Mono', Menlo, Consolas, monospace" font-size="10.5" font-weight="700" fill="#5b21b6" text-anchor="middle">U2</text>
+<rect x="1004.8" y="544" width="27.2" height="17" rx="8.5" fill="#ede9fe"/>
+<text x="1018.4" y="556.5" font-family="'SF Mono', Menlo, Consolas, monospace" font-size="10.5" font-weight="700" fill="#5b21b6" text-anchor="middle">U1</text>
+<rect x="1220" y="150" width="400" height="298" rx="14" fill="#ffffff" stroke="#86efac" stroke-width="1.5" filter="url(#sh)"/>
+<path d="M1220 164 a14 14 0 0 1 14 -14 h372 a14 14 0 0 1 14 14 v52 h-400 z" fill="#dcfce7"/>
+<text x="1238" y="180" font-family="-apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="20" font-weight="700" fill="#14532d">doctors</text>
+<text x="1238" y="202" font-family="-apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="13" fill="#14532d" opacity="0.8">Doctors, their fee and consulting room</text>
+<text x="1238" y="237" font-family="-apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="14.5" font-weight="700" fill="#0f172a" text-decoration="underline">doctor_id</text>
+<text x="1392" y="237" font-family="'SF Mono', Menlo, Consolas, monospace" font-size="12.5" fill="#64748b">INT UNSIGNED</text>
+<rect x="1576.8" y="224" width="27.2" height="17" rx="8.5" fill="#f1f5f9"/>
+<text x="1590.3999999999999" y="236.5" font-family="'SF Mono', Menlo, Consolas, monospace" font-size="10.5" font-weight="700" fill="#334155" text-anchor="middle">NN</text>
+<rect x="1544.6" y="224" width="27.2" height="17" rx="8.5" fill="#fef3c7"/>
+<text x="1558.1999999999998" y="236.5" font-family="'SF Mono', Menlo, Consolas, monospace" font-size="10.5" font-weight="700" fill="#92400e" text-anchor="middle">PK</text>
+<line x1="1232" y1="248" x2="1608" y2="248" stroke="#f1f5f9"/>
+<text x="1238" y="269" font-family="-apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="14.5" font-weight="500" fill="#0f172a">full_name</text>
+<text x="1392" y="269" font-family="'SF Mono', Menlo, Consolas, monospace" font-size="12.5" fill="#64748b">VARCHAR(100)</text>
+<rect x="1569.2" y="256" width="34.8" height="17" rx="8.5" fill="#e0f2fe"/>
+<text x="1586.6000000000001" y="268.5" font-family="'SF Mono', Menlo, Consolas, monospace" font-size="10.5" font-weight="700" fill="#075985" text-anchor="middle">CHK</text>
+<rect x="1537.0" y="256" width="27.2" height="17" rx="8.5" fill="#f1f5f9"/>
+<text x="1550.6" y="268.5" font-family="'SF Mono', Menlo, Consolas, monospace" font-size="10.5" font-weight="700" fill="#334155" text-anchor="middle">NN</text>
+<line x1="1232" y1="280" x2="1608" y2="280" stroke="#f1f5f9"/>
+<text x="1238" y="301" font-family="-apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="14.5" font-weight="500" fill="#0f172a">specialty</text>
+<text x="1392" y="301" font-family="'SF Mono', Menlo, Consolas, monospace" font-size="12.5" fill="#64748b">VARCHAR(100)</text>
+<rect x="1576.8" y="288" width="27.2" height="17" rx="8.5" fill="#f1f5f9"/>
+<text x="1590.3999999999999" y="300.5" font-family="'SF Mono', Menlo, Consolas, monospace" font-size="10.5" font-weight="700" fill="#334155" text-anchor="middle">NN</text>
+<line x1="1232" y1="312" x2="1608" y2="312" stroke="#f1f5f9"/>
+<text x="1238" y="333" font-family="-apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="14.5" font-weight="500" fill="#0f172a">consultation_fee</text>
+<text x="1392" y="333" font-family="'SF Mono', Menlo, Consolas, monospace" font-size="12.5" fill="#64748b">DECIMAL(10,2)</text>
+<rect x="1569.2" y="320" width="34.8" height="17" rx="8.5" fill="#e0f2fe"/>
+<text x="1586.6000000000001" y="332.5" font-family="'SF Mono', Menlo, Consolas, monospace" font-size="10.5" font-weight="700" fill="#075985" text-anchor="middle">CHK</text>
+<rect x="1537.0" y="320" width="27.2" height="17" rx="8.5" fill="#f1f5f9"/>
+<text x="1550.6" y="332.5" font-family="'SF Mono', Menlo, Consolas, monospace" font-size="10.5" font-weight="700" fill="#334155" text-anchor="middle">NN</text>
+<line x1="1232" y1="344" x2="1608" y2="344" stroke="#f1f5f9"/>
+<text x="1238" y="365" font-family="-apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="14.5" font-weight="500" fill="#0f172a">room</text>
+<text x="1392" y="365" font-family="'SF Mono', Menlo, Consolas, monospace" font-size="12.5" fill="#64748b">VARCHAR(10)</text>
+<rect x="1576.8" y="352" width="27.2" height="17" rx="8.5" fill="#f1f5f9"/>
+<text x="1590.3999999999999" y="364.5" font-family="'SF Mono', Menlo, Consolas, monospace" font-size="10.5" font-weight="700" fill="#334155" text-anchor="middle">NN</text>
+<line x1="1232" y1="376" x2="1608" y2="376" stroke="#f1f5f9"/>
+<text x="1238" y="397" font-family="-apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="14.5" font-weight="500" fill="#0f172a">created_at</text>
+<text x="1392" y="397" font-family="'SF Mono', Menlo, Consolas, monospace" font-size="12.5" fill="#64748b">DATETIME</text>
+<rect x="1576.8" y="384" width="27.2" height="17" rx="8.5" fill="#f1f5f9"/>
+<text x="1590.3999999999999" y="396.5" font-family="'SF Mono', Menlo, Consolas, monospace" font-size="10.5" font-weight="700" fill="#334155" text-anchor="middle">NN</text>
+<line x1="1232" y1="408" x2="1608" y2="408" stroke="#f1f5f9"/>
+<text x="1238" y="429" font-family="-apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="14.5" font-weight="500" fill="#0f172a">updated_at</text>
+<text x="1392" y="429" font-family="'SF Mono', Menlo, Consolas, monospace" font-size="12.5" fill="#64748b">DATETIME</text>
+<rect x="1576.8" y="416" width="27.2" height="17" rx="8.5" fill="#f1f5f9"/>
+<text x="1590.3999999999999" y="428.5" font-family="'SF Mono', Menlo, Consolas, monospace" font-size="10.5" font-weight="700" fill="#334155" text-anchor="middle">NN</text>
+<path d="M460 232.0 H510.0 V264.0 H560" fill="none" stroke="#334155" stroke-width="2"/>
+<line x1="469" y1="224.0" x2="469" y2="240.0" stroke="#334155" stroke-width="2"/>
+<line x1="476" y1="224.0" x2="476" y2="240.0" stroke="#334155" stroke-width="2"/>
+<line x1="545" y1="264.0" x2="560" y2="255.0" stroke="#334155" stroke-width="2"/>
+<line x1="545" y1="264.0" x2="560" y2="264.0" stroke="#334155" stroke-width="2"/>
+<line x1="545" y1="264.0" x2="560" y2="273.0" stroke="#334155" stroke-width="2"/>
+<circle cx="536" cy="264.0" r="5.5" fill="#fbfaf7" stroke="#334155" stroke-width="2"/>
+<text x="510.0" y="220.0" font-family="-apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="14" font-weight="700" fill="#0f172a" text-anchor="middle">1 : N</text>
+<path d="M1220 232.0 H1170.0 V296.0 H1120" fill="none" stroke="#334155" stroke-width="2"/>
+<line x1="1211" y1="224.0" x2="1211" y2="240.0" stroke="#334155" stroke-width="2"/>
+<line x1="1204" y1="224.0" x2="1204" y2="240.0" stroke="#334155" stroke-width="2"/>
+<line x1="1135" y1="296.0" x2="1120" y2="287.0" stroke="#334155" stroke-width="2"/>
+<line x1="1135" y1="296.0" x2="1120" y2="296.0" stroke="#334155" stroke-width="2"/>
+<line x1="1135" y1="296.0" x2="1120" y2="305.0" stroke="#334155" stroke-width="2"/>
+<circle cx="1144" cy="296.0" r="5.5" fill="#fbfaf7" stroke="#334155" stroke-width="2"/>
+<text x="1170.0" y="220.0" font-family="-apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="14" font-weight="700" fill="#0f172a" text-anchor="middle">1 : N</text>
+<text x="40" y="448" font-family="-apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="14" fill="#334155">A patient can have <tspan font-weight="700">zero or many</tspan> appointments.</text>
+<text x="40" y="470" font-family="-apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="14" fill="#334155">Every appointment has <tspan font-weight="700">exactly one</tspan> patient.</text>
+<text x="1220" y="480" font-family="-apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="14" fill="#334155">A doctor can have <tspan font-weight="700">zero or many</tspan> appointments.</text>
+<text x="1220" y="502" font-family="-apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="14" fill="#334155">Every appointment has <tspan font-weight="700">exactly one</tspan> doctor.</text>
+<line x1="1229" y1="534" x2="1229" y2="550" stroke="#334155" stroke-width="2"/>
+<line x1="1236" y1="534" x2="1236" y2="550" stroke="#334155" stroke-width="2"/>
+<line x1="1220" y1="542" x2="1256" y2="542" stroke="#334155" stroke-width="2"/>
+<text x="1268" y="547" font-family="-apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="13" fill="#475569">exactly one</text>
+<line x1="1370" y1="542" x2="1406" y2="542" stroke="#334155" stroke-width="2"/>
+<line x1="1391" y1="542" x2="1406" y2="533" stroke="#334155" stroke-width="2"/>
+<line x1="1391" y1="542" x2="1406" y2="542" stroke="#334155" stroke-width="2"/>
+<line x1="1391" y1="542" x2="1406" y2="551" stroke="#334155" stroke-width="2"/>
+<circle cx="1382" cy="542" r="5.5" fill="#fbfaf7" stroke="#334155" stroke-width="2"/>
+<text x="1418" y="547" font-family="-apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="13" fill="#475569">zero or many</text>
+<rect x="40" y="610" width="620" height="345" rx="14" fill="#ffffff" stroke="#c4b5fd" stroke-width="2" filter="url(#sh)"/>
+<text x="64" y="650" font-family="-apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="19" font-weight="700" fill="#4c1d95">No double-booking</text>
+<text x="64" y="682" font-family="'SF Mono', Menlo, Consolas, monospace" font-size="13.5" font-weight="700" fill="#5b21b6">U1  UNIQUE (doctor_id, appt_datetime, active_flag)</text>
+<text x="64" y="716" font-family="-apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="14.5" fill="#1e293b">A doctor can never have two appointments at the same</text>
+<text x="64" y="736" font-family="-apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="14.5" fill="#1e293b">date and time.</text>
+<text x="64" y="756" font-family="-apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="14.5" fill="#1e293b"></text>
+<text x="64" y="776" font-family="-apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="14.5" fill="#1e293b">active_flag is 1 while an appointment is BOOKED and becomes</text>
+<text x="64" y="796" font-family="-apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="14.5" fill="#1e293b">NULL when it is CANCELLED. A UNIQUE index ignores NULLs, so a</text>
+<text x="64" y="816" font-family="-apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="14.5" fill="#1e293b">cancelled appointment stays in the table for refund history</text>
+<text x="64" y="836" font-family="-apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="14.5" fill="#1e293b">but no longer blocks the slot: someone else can book it.</text>
+<text x="64" y="856" font-family="-apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="14.5" fill="#1e293b"></text>
+<text x="64" y="876" font-family="-apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="14.5" fill="#1e293b">U2 does the same for patients: one appointment per patient</text>
+<text x="64" y="896" font-family="-apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="14.5" fill="#1e293b">at any given time.</text>
+<rect x="690" y="610" width="930" height="345" rx="14" fill="#ffffff" stroke="#e2e8f0" stroke-width="1.5" filter="url(#sh)"/>
+<text x="714" y="650" font-family="-apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="19" font-weight="700" fill="#0f172a">Other rules the database checks</text>
+<rect x="714" y="675" width="34.8" height="17" rx="8.5" fill="#e0f2fe"/>
+<text x="731.4" y="687.5" font-family="'SF Mono', Menlo, Consolas, monospace" font-size="10.5" font-weight="700" fill="#075985" text-anchor="middle">CHK</text>
+<text x="760" y="688" font-family="-apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="14" fill="#1e293b">Slots start on the hour or half hour</text>
+<text x="1596" y="688" font-family="'SF Mono', Menlo, Consolas, monospace" font-size="11.5" fill="#64748b" text-anchor="end">MINUTE IN (0, 30), SECOND = 0</text>
+<rect x="714" y="705" width="34.8" height="17" rx="8.5" fill="#e0f2fe"/>
+<text x="731.4" y="717.5" font-family="'SF Mono', Menlo, Consolas, monospace" font-size="10.5" font-weight="700" fill="#075985" text-anchor="middle">CHK</text>
+<text x="760" y="718" font-family="-apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="14" fill="#1e293b">Only within working hours (last slot 16:30, ends 17:00)</text>
+<text x="1596" y="718" font-family="'SF Mono', Menlo, Consolas, monospace" font-size="11.5" fill="#64748b" text-anchor="end">TIME BETWEEN &#x27;09:00&#x27; AND &#x27;16:30&#x27;</text>
+<rect x="714" y="735" width="34.8" height="17" rx="8.5" fill="#e0f2fe"/>
+<text x="731.4" y="747.5" font-family="'SF Mono', Menlo, Consolas, monospace" font-size="10.5" font-weight="700" fill="#075985" text-anchor="middle">CHK</text>
+<text x="760" y="748" font-family="-apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="14" fill="#1e293b">Money is never negative</text>
+<text x="1596" y="748" font-family="'SF Mono', Menlo, Consolas, monospace" font-size="11.5" fill="#64748b" text-anchor="end">amount_paid, consultation_fee &gt;= 0</text>
+<rect x="714" y="765" width="34.8" height="17" rx="8.5" fill="#e0f2fe"/>
+<text x="731.4" y="777.5" font-family="'SF Mono', Menlo, Consolas, monospace" font-size="10.5" font-weight="700" fill="#075985" text-anchor="middle">CHK</text>
+<text x="760" y="778" font-family="-apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="14" fill="#1e293b">Refund is 0%, 50% or 100% and never more than was paid</text>
+<text x="1596" y="778" font-family="'SF Mono', Menlo, Consolas, monospace" font-size="11.5" fill="#64748b" text-anchor="end">refund_percent IN (0,50,100)</text>
+<rect x="714" y="795" width="34.8" height="17" rx="8.5" fill="#e0f2fe"/>
+<text x="731.4" y="807.5" font-family="'SF Mono', Menlo, Consolas, monospace" font-size="10.5" font-weight="700" fill="#075985" text-anchor="middle">CHK</text>
+<text x="760" y="808" font-family="-apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="14" fill="#1e293b">A cancelled booking must record when and how much was refunded</text>
+<text x="1596" y="808" font-family="'SF Mono', Menlo, Consolas, monospace" font-size="11.5" fill="#64748b" text-anchor="end">status vs cancelled_at / refund_*</text>
+<rect x="714" y="825" width="27.2" height="17" rx="8.5" fill="#ffe4e6"/>
+<text x="727.6" y="837.5" font-family="'SF Mono', Menlo, Consolas, monospace" font-size="10.5" font-weight="700" fill="#9f1239" text-anchor="middle">FK</text>
+<text x="760" y="838" font-family="-apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="14" fill="#1e293b">A patient or doctor with appointments cannot be deleted</text>
+<text x="1596" y="838" font-family="'SF Mono', Menlo, Consolas, monospace" font-size="11.5" fill="#64748b" text-anchor="end">ON DELETE RESTRICT</text>
+<rect x="714" y="855" width="27.2" height="17" rx="8.5" fill="#ede9fe"/>
+<text x="727.6" y="867.5" font-family="'SF Mono', Menlo, Consolas, monospace" font-size="10.5" font-weight="700" fill="#5b21b6" text-anchor="middle">UQ</text>
+<text x="760" y="868" font-family="-apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="14" fill="#1e293b">Each patient email is used only once</text>
+<text x="1596" y="868" font-family="'SF Mono', Menlo, Consolas, monospace" font-size="11.5" fill="#64748b" text-anchor="end">UNIQUE (email)</text>
+<line x1="714" y1="890" x2="1596" y2="890" stroke="#f1f5f9"/>
+<text x="714" y="910" font-family="-apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="13.5" fill="#475569"><tspan font-weight="700">Checked in the app, not the database:</tspan> bookings must be in the future, and a doctor has at most</text>
+<text x="714" y="930" font-family="-apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="13.5" fill="#475569">12 appointments per day (counted while the doctor row is locked).</text>
 </svg>
