@@ -114,7 +114,7 @@ The tests need no MySQL or Redis server.
 │   ├── schema.sql            DDL: 3 tables, keys, constraints (Part B.1)
 │   └── seed.sql              sample data incl. zero-appointment doctor + near-cap day
 ├── locales/                  en.json, fr.json for the feedback page (Part G)
-├── schema-diagram.svg/.png   database diagram (Part A)
+├── schema-diagram.png        database diagram (Part A)
 ├── requests.http             ready-made requests for every endpoint (VS Code REST Client)
 ├── scripts/db-setup.js       runs schema.sql + seed.sql
 ├── src/
