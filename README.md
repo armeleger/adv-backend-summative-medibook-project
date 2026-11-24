@@ -4,6 +4,8 @@
 
 Express.js + MySQL + Redis backend for booking doctor appointments: patients, doctors and appointments; booking rules (future only, working hours, 30-minute slots, 12 appointments per doctor per day, no double booking under concurrency); cancellations with server-computed refunds; a Redis-backed waitlist promoted by a separate worker process; an audit log; SQL reports; and a localized feedback page.
 
+**Video walkthrough:** [https://youtu.be/UJ9EUYq18hk](https://youtu.be/UJ9EUYq18hk)
+
 The original assignment brief is in [docs/assignment-brief.md](docs/assignment-brief.md).
 
 ---
